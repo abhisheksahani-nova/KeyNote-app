@@ -1,0 +1,31 @@
+.note-container {
+  width: 15.2rem;
+  background-color: var(--info-pri-clr);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.note-title-container {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.note-footer {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-icons-container {
+  width: 5rem;
+}
+
+.note-label-priority-container {
+  width: 6rem;
+}
+
+.note-label-priority {
+  background-color: aliceblue;
+  padding: 0.25rem;
+  border-radius: 4px;
+}

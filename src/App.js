@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Sidebar } from "./components/index";
+import { Navbar, Sidebar, NoteCard } from "./components/index";
 
 function App() {
   return (
