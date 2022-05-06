@@ -1,6 +1,6 @@
 .videolib-drawer-container {
-  width: 15rem;
-  padding: 0.3rem;
+  width: 22%;
+  padding: 0.3rem 3rem 0.3rem 0;
 }
 
 .video-drawer-header-container {
@@ -48,10 +48,11 @@
 }
 
 .sidebar-list {
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 2rem;
   margin: 0;
 }
 
 .sidebar-list:hover {
   background-color: var(--custom-pri-clr);
+  border-radius: 0 8px 8px 0;
 }

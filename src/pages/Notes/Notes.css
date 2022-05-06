@@ -1,0 +1,32 @@
+.add-note-inp {
+  width: 30rem;
+  border-radius: 5px;
+  padding: 0.8rem;
+  margin-right: 14rem;
+  margin-left: 13rem;
+}
+
+.notes-container {
+  width: 78%;
+  padding: 2rem 0;
+}
+
+.font-size-small {
+  font-size: 0.7rem;
+}
+
+.notecard-container {
+  margin-top: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 5rem;
+}
+
+.f-weight-500 {
+  font-weight: 500;
+}
+
+.pri-btn-style {
+  background-color: #efd345;
+}
