@@ -1,8 +1,17 @@
 import React from "react";
-import { Notes } from "./pages/index";
+import { Notes, Login, Signup } from "./pages/index";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  return <Notes />;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Notes />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
