@@ -1,6 +1,7 @@
 import React from "react";
 import { Notes, Login, Signup } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
+import Mockman from "mockman-js";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Route path="/" element={<Notes />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/mock" element={<Mockman />}></Route>
       </Routes>
     </div>
   );
