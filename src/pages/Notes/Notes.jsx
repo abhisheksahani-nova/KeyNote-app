@@ -25,9 +25,6 @@ function Notes() {
               </small>
               <div className="d-flex notecard-container">
                 <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
               </div>
             </div>
             <div>
@@ -35,8 +32,6 @@ function Notes() {
                 OTHERS
               </small>
               <div className="d-flex notecard-container">
-                <NoteCard />
-                <NoteCard />
                 <NoteCard />
               </div>
             </div>
