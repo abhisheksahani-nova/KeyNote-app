@@ -1,7 +1,7 @@
 import React from "react";
 import "./NoteCard.css";
 
-function NoteCard() {
+function NoteCard({noteData}) {
   return (
     <div className="note-container">
       <div className="d-flex note-title-container">

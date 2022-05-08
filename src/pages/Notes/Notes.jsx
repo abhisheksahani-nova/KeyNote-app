@@ -6,12 +6,23 @@ import TextareaAutosize from "react-textarea-autosize";
 
 function Notes() {
   const [openCreateNote, setOpenCreateNote] = useState(false);
+  const [noteData, setNoteData] = useState({
+    title: "",
+    note: "",
+    priority: "low",
+    isPinned: false,
+  });
 
-  const { getNotes } = useNotes();
+  const { notes, addNewNote } = useNotes();
   const token = localStorage.getItem("token");
+
+  const pinnedNotes = () => notes.filter((note) => note.isPinned);
+
+  const otherNotes = () => notes.filter((note) => note.isPinned);
 
   return (
     <div>
+      {console.log(notes)}
       <Navbar />
       <section className="d-flex">
         <Sidebar />
@@ -22,21 +33,44 @@ function Notes() {
               <div className="create-note-container">
                 <div className="d-flex title-inp-container mb-2">
                   <input
+                    onChange={(e) =>
+                      setNoteData({ ...noteData, title: e.target.value })
+                    }
+                    value={noteData.title}
                     className="note-title-inp"
                     type="text"
                     placeholder="Title"
                   />
-                  <i className="fa-solid fa-thumbtack"></i>
+                  <i
+                    className="fa-solid fa-thumbtack"
+                    onClick={() =>
+                      setNoteData({ ...noteData, isPinned: !noteData.isPinned })
+                    }
+                  ></i>
                 </div>
 
                 <TextareaAutosize
                   className="create-note-textarea"
                   placeholder="Take a note..."
+                  onChange={(e) =>
+                    setNoteData({ ...noteData, note: e.target.value })
+                  }
+                  value={noteData.note}
                 />
 
                 <div className="d-flex note-footer mt-2">
                   <div className="d-flex note-footer note-icons-container create-note-footer-icons-container">
-                    <i className="fa-solid fa-pencil"></i>
+                    <select
+                      onChange={(e) =>
+                        setNoteData({ ...noteData, priority: e.target.value })
+                      }
+                      value={noteData.priority}
+                      className="note-priority-dropdown"
+                    >
+                      <option value="low">low</option>
+                      <option value="medium">medium</option>
+                      <option value="high">high</option>
+                    </select>
                     <i className="fa-solid fa-box-archive"></i>
                     <i className="fa-solid fa-trash-can"></i>
                   </div>
@@ -47,7 +81,12 @@ function Notes() {
                     >
                       Close
                     </button>
-                    <button className="btn pri-btn-style btn-small-size">Save</button>
+                    <button
+                      className="btn pri-btn-style btn-small-size"
+                      onClick={() => addNewNote(token, noteData)}
+                    >
+                      Save
+                    </button>
                   </div>
                 </div>
               </div>
@@ -60,7 +99,9 @@ function Notes() {
               />
             )}
 
-            <button className="btn pri-btn-style"><i class="fa-solid fa-filter"></i> Filter</button>
+            <button className="btn pri-btn-style">
+              <i class="fa-solid fa-filter"></i> Filter
+            </button>
           </div>
           <div>
             <div>
@@ -68,7 +109,11 @@ function Notes() {
                 PINNED
               </small>
               <div className="d-flex notecard-container">
-                <NoteCard />
+                {pinnedNotes.map((pinnedNote) => {
+                  return (
+                    <NoteCard key={pinnedNote._id} noteData={pinnedNote} />
+                  );
+                })}
               </div>
             </div>
             <div>
@@ -76,7 +121,9 @@ function Notes() {
                 OTHERS
               </small>
               <div className="d-flex notecard-container">
-                <NoteCard />
+                {otherNotes.map((otherNote) => {
+                  return <NoteCard key={otherNote._id} noteData={otherNote} />;
+                })}
               </div>
             </div>
           </div>

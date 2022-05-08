@@ -32,7 +32,7 @@
   padding: 0.7rem;
 }
 
-.btn-small-size{
+.btn-small-size {
   padding: 0.5rem 0.7rem;
 }
 
@@ -42,6 +42,7 @@
   padding: 1rem;
   margin-right: 12rem;
   margin-left: 12rem;
+  border-radius: 8px;
 }
 
 .title-inp-container {
@@ -71,10 +72,16 @@
 }
 
 .create-note-footer-icons-container {
-  width: 6rem;
+  width: 9rem;
 }
 
 .align-items-start {
   align-items: flex-start;
 }
 
+.note-priority-dropdown {
+  border: 1px solid var(--gray-shade5);
+  outline: none;
+  width: 4.5rem;
+  border-radius: 3px;
+}
