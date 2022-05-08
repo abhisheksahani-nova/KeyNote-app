@@ -17,7 +17,7 @@ function Notes() {
         <Sidebar />
 
         <div className="notes-container">
-          <div className="d-flex mb-2">
+          <div className="d-flex align-items-start mb-2">
             {openCreateNote ? (
               <div className="create-note-container">
                 <div className="d-flex title-inp-container mb-2">
@@ -43,11 +43,11 @@ function Notes() {
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
                       onClick={() => setOpenCreateNote((prev) => !prev)}
-                      className="btn btn-outline"
+                      className="btn btn-outline btn-small-size"
                     >
                       Close
                     </button>
-                    <button className="btn pri-btn-style">Save</button>
+                    <button className="btn pri-btn-style btn-small-size">Save</button>
                   </div>
                 </div>
               </div>
@@ -60,7 +60,7 @@ function Notes() {
               />
             )}
 
-            <button className="btn pri-btn-style">Filter</button>
+            <button className="btn pri-btn-style"><i class="fa-solid fa-filter"></i> Filter</button>
           </div>
           <div>
             <div>

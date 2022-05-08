@@ -29,6 +29,11 @@
 
 .pri-btn-style {
   background-color: #efd345;
+  padding: 0.7rem;
+}
+
+.btn-small-size{
+  padding: 0.5rem 0.7rem;
 }
 
 .create-note-container {
@@ -62,10 +67,14 @@
 }
 
 .create-note-btn-container {
-  width: 9rem;
+  width: 8.5rem;
 }
 
 .create-note-footer-icons-container {
   width: 6rem;
+}
+
+.align-items-start {
+  align-items: flex-start;
 }
 
