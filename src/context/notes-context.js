@@ -39,7 +39,7 @@ const NotesProvider = ({ children }) => {
   const updateNote = async (token, note, id) => {
     try {
       const response = await axios.post(
-        `/api/notes/:${id}`,
+        `/api/notes/${id}`,
         { note },
         {
           headers: { authorization: token },
@@ -53,9 +53,9 @@ const NotesProvider = ({ children }) => {
     }
   };
 
-  const deleteNote = async (token, note, id) => {
+  const deleteNote = async (token, id) => {
     try {
-      const response = await axios.delete(`/api/notes/:${id}`, {
+      const response = await axios.delete(`/api/notes/${id}`, {
         headers: { authorization: token },
       });
 

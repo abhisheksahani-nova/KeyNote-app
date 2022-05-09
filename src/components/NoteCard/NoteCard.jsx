@@ -4,7 +4,8 @@ import { useNotes } from "../../context/notes-context";
 
 function NoteCard({ noteInfo }) {
   const { _id, title, note, priority, isPinned } = noteInfo;
-  const { notes, setNotes } = useNotes();
+  const { notes, setNotes, deleteNote} = useNotes();
+  const token = localStorage.getItem("token");
 
   function handleTogglePinNote() {
     let tempNote = notes;
@@ -35,7 +36,12 @@ function NoteCard({ noteInfo }) {
         <div className="d-flex note-footer note-icons-container">
           <i className="fa-solid fa-pencil"></i>
           <i className="fa-solid fa-box-archive"></i>
-          <i className="fa-solid fa-trash-can"></i>
+          <i
+            className="fa-solid fa-trash-can"
+            onClick={() => {
+              deleteNote(token, _id);
+            }}
+          ></i>
         </div>
       </div>
     </div>
