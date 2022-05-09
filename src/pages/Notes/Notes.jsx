@@ -6,6 +6,8 @@ import TextareaAutosize from "react-textarea-autosize";
 
 function Notes() {
   const [openCreateNote, setOpenCreateNote] = useState(false);
+  const [isUpdateNote, setIsUpdateNote] = useState(false);
+  const [noteId, setNoteId] = useState("");
   const [noteData, setNoteData] = useState({
     title: "",
     note: "",
@@ -13,7 +15,7 @@ function Notes() {
     isPinned: false,
   });
 
-  const { notes, addNewNote } = useNotes();
+  const { notes, addNewNote, updateNote } = useNotes();
   const token = localStorage.getItem("token");
 
   function pinnedNotes() {
@@ -26,8 +28,13 @@ function Notes() {
     return temp.filter((note) => !note.isPinned);
   }
 
-  function handleAddNewNote(token, noteData) {
-    addNewNote(token, noteData);
+  function handleSaveNote(token, noteData, noteId) {
+    if (isUpdateNote) {
+      updateNote(token, noteData, noteId);
+    } else {
+      addNewNote(token, noteData);
+    }
+
     setOpenCreateNote((prev) => !prev);
     setNoteData({ title: "", note: "", priority: "low", isPinned: false });
   }
@@ -94,7 +101,7 @@ function Notes() {
                     </button>
                     <button
                       className="btn pri-btn-style btn-small-size"
-                      onClick={() => handleAddNewNote(token, noteData)}
+                      onClick={() => handleSaveNote(token, noteData, noteId)}
                     >
                       Save
                     </button>
@@ -122,7 +129,14 @@ function Notes() {
               <div className="d-flex notecard-container">
                 {pinnedNotes().map((pinnedNote) => {
                   return (
-                    <NoteCard key={pinnedNote._id} noteInfo={pinnedNote} />
+                    <NoteCard
+                      key={pinnedNote._id}
+                      noteInfo={pinnedNote}
+                      setNoteData={setNoteData}
+                      setNoteId={setNoteId}
+                      setIsUpdateNote={setIsUpdateNote}
+                      setOpenCreateNote={setOpenCreateNote}
+                    />
                   );
                 })}
               </div>
@@ -133,7 +147,16 @@ function Notes() {
               </small>
               <div className="d-flex notecard-container">
                 {otherNotes().map((otherNote) => {
-                  return <NoteCard key={otherNote._id} noteInfo={otherNote} />;
+                  return (
+                    <NoteCard
+                      key={otherNote._id}
+                      noteInfo={otherNote}
+                      setNoteData={setNoteData}
+                      setNoteId={setNoteId}
+                      setIsUpdateNote={setIsUpdateNote}
+                      setOpenCreateNote={setOpenCreateNote}
+                    />
+                  );
                 })}
               </div>
             </div>
