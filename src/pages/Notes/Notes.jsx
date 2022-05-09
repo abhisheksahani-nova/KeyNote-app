@@ -16,13 +16,24 @@ function Notes() {
   const { notes, addNewNote } = useNotes();
   const token = localStorage.getItem("token");
 
-  const pinnedNotes = () => notes.filter((note) => note.isPinned);
+  function pinnedNotes() {
+    let temp = notes;
+    return temp.filter((note) => note.isPinned);
+  }
 
-  const otherNotes = () => notes.filter((note) => note.isPinned);
+  function otherNotes() {
+    let temp = notes;
+    return temp.filter((note) => !note.isPinned);
+  }
+
+  function handleAddNewNote(token, noteData) {
+    addNewNote(token, noteData);
+    setOpenCreateNote((prev) => !prev);
+    setNoteData({ title: "", note: "", priority: "low", isPinned: false });
+  }
 
   return (
     <div>
-      {console.log(notes)}
       <Navbar />
       <section className="d-flex">
         <Sidebar />
@@ -83,7 +94,7 @@ function Notes() {
                     </button>
                     <button
                       className="btn pri-btn-style btn-small-size"
-                      onClick={() => addNewNote(token, noteData)}
+                      onClick={() => handleAddNewNote(token, noteData)}
                     >
                       Save
                     </button>
@@ -109,9 +120,9 @@ function Notes() {
                 PINNED
               </small>
               <div className="d-flex notecard-container">
-                {pinnedNotes.map((pinnedNote) => {
+                {pinnedNotes().map((pinnedNote) => {
                   return (
-                    <NoteCard key={pinnedNote._id} noteData={pinnedNote} />
+                    <NoteCard key={pinnedNote._id} noteInfo={pinnedNote} />
                   );
                 })}
               </div>
@@ -121,8 +132,8 @@ function Notes() {
                 OTHERS
               </small>
               <div className="d-flex notecard-container">
-                {otherNotes.map((otherNote) => {
-                  return <NoteCard key={otherNote._id} noteData={otherNote} />;
+                {otherNotes().map((otherNote) => {
+                  return <NoteCard key={otherNote._id} noteInfo={otherNote} />;
                 })}
               </div>
             </div>
