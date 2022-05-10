@@ -122,6 +122,7 @@ function Notes() {
               <i class="fa-solid fa-filter"></i> Filter
             </button>
           </div>
+          
           <div>
             <div>
               <small className="font-size-small ml-1 f-weight-500">

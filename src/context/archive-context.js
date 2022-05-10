@@ -28,11 +28,16 @@ const ArchivesProvider = ({ children }) => {
 
   const restoreNoteFromArchives = async (token, id) => {
     try {
-      const response = await axios.post(`/api/archives/restore/${id}`, {
-        headers: { authorization: token },
-      });
+      const response = await axios.post(
+        `/api/archives/restore/${id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
 
       setArchives(response.data.archives);
+      setNotes(response.data.notes);
       console.log(response);
     } catch (error) {
       console.log(error);
