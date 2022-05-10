@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { NotesProvider } from "./context/notes-context";
 import { TrashProvider } from "./context/trash-context";
 import { ArchivesProvider } from "./context/archive-context";
+import { LabelProvider } from "./context/labels-context";
 
 // Call make Server
 makeServer();
@@ -17,7 +18,9 @@ ReactDOM.render(
       <NotesProvider>
         <ArchivesProvider>
           <TrashProvider>
-            <App />
+            <LabelProvider>
+              <App />
+            </LabelProvider>
           </TrashProvider>
         </ArchivesProvider>
       </NotesProvider>

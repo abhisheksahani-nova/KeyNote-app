@@ -15,8 +15,8 @@
 .playlist-stacklist {
   width: fit-content;
   z-index: 2;
-  background-color: var(--gray-shade3);
-  color: var(--light-clr);
+  background-color: var(--light-clr);
+  color: var(--gray-shade3);
   display: grid;
   position: fixed;
   top: 35%;
@@ -25,12 +25,14 @@
 
 .playlist-li-item {
   padding-left: 8px;
+  border: none;
 }
 
 .playlist-dropdown-inp {
   padding: 0.4rem;
-  border-radius: 3px;
   border: none;
+  border-bottom: 1px solid var(--gray-shade5);
+  outline: none;
 }
 
 .cursor-p {
@@ -41,10 +43,18 @@
   justify-content: right;
 }
 
+.j-space-between {
+  justify-content: space-between;
+}
+
 .playlist-create-btn-resize {
-  padding: 0.5rem;
+  padding: 0.3rem 0.7rem;
 }
 
 .playlist-add-icon {
   margin-right: 5px;
+}
+
+.p-small{
+  padding: 0.5rem;
 }

@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Navbar, Sidebar, NoteCard, LabelDropdown } from "../../components/index";
+import {
+  Navbar,
+  Sidebar,
+  NoteCard,
+  LabelDropdown,
+} from "../../components/index";
 import "./Notes.css";
 import { useNotes } from "../../context/notes-context";
 import TextareaAutosize from "react-textarea-autosize";
 
 function Notes() {
+  const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
@@ -45,7 +51,9 @@ function Notes() {
       <Navbar />
       <section className="d-flex">
         <Sidebar />
-        <LabelDropdown/>
+        {isLabelDropdownOpen && (
+          <LabelDropdown setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+        )}
 
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2">
@@ -119,8 +127,11 @@ function Notes() {
               />
             )}
 
-            <button className="btn pri-btn-style mr-1">
-              <i class="fa-solid fa-plus"></i> Label
+            <button
+              className="btn pri-btn-style mr-1"
+              onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+            >
+              <i class="fa-solid fa-plus"></i> Add label
             </button>
             <button className="btn pri-btn-style">
               <i class="fa-solid fa-filter"></i> Filter
