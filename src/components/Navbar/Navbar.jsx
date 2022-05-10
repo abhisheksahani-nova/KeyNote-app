@@ -18,29 +18,6 @@ function Navbar() {
           type="text"
         />
       </div>
-
-      <div className="nav-innerContainer nav-icon-container width-reset inherit-clr mr-1">
-        <div className="flex-col-center">
-          <a className="font-clr" href="#">
-            <i className="fa-solid fa-heart"></i>
-          </a>
-          <small>Wishlist</small>
-        </div>
-
-        <div className="flex-col-center">
-          <a className="font-clr" href="#">
-            <i className="fa-solid fa-user"></i>
-          </a>
-          <small>Profile</small>
-        </div>
-
-        <div className="flex-col-center">
-          <a className="font-clr nav-icon" href="#">
-            <i className="fa-solid fa-cart-shopping"></i>
-          </a>
-          <small>Cart</small>
-        </div>
-      </div>
     </nav>
   );
 }
