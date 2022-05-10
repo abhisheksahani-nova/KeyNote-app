@@ -2,8 +2,8 @@
   width: 35rem;
   border-radius: 5px;
   padding: 0.8rem;
-  margin-right: 12rem;
-  margin-left: 12rem;
+  margin-right: 11rem;
+  margin-left: 8rem;
 }
 
 .notes-container {
@@ -40,8 +40,8 @@
   width: 35rem;
   border: 1px solid var(--gray-shade5);
   padding: 1rem;
-  margin-right: 12rem;
-  margin-left: 12rem;
+  margin-right: 11rem;
+  margin-left: 8rem;
   border-radius: 8px;
 }
 

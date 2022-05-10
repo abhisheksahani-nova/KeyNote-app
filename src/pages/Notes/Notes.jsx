@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navbar, Sidebar, NoteCard } from "../../components/index";
+import { Navbar, Sidebar, NoteCard, LabelDropdown } from "../../components/index";
 import "./Notes.css";
 import { useNotes } from "../../context/notes-context";
 import TextareaAutosize from "react-textarea-autosize";
@@ -45,6 +45,7 @@ function Notes() {
       <Navbar />
       <section className="d-flex">
         <Sidebar />
+        <LabelDropdown/>
 
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2">
@@ -118,11 +119,14 @@ function Notes() {
               />
             )}
 
+            <button className="btn pri-btn-style mr-1">
+              <i class="fa-solid fa-plus"></i> Label
+            </button>
             <button className="btn pri-btn-style">
               <i class="fa-solid fa-filter"></i> Filter
             </button>
           </div>
-          
+
           <div>
             <div>
               <small className="font-size-small ml-1 f-weight-500">
