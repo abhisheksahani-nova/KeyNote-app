@@ -31,6 +31,7 @@ function Notes() {
   function handleSaveNote(token, noteData, noteId) {
     if (isUpdateNote) {
       updateNote(token, noteData, noteId);
+      setIsUpdateNote((prev) => !prev);
     } else {
       addNewNote(token, noteData);
     }

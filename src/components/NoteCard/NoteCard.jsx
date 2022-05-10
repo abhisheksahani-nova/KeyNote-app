@@ -1,6 +1,7 @@
 import React from "react";
 import "./NoteCard.css";
 import { useNotes } from "../../context/notes-context";
+import { useArchives } from "../../context/archive-context";
 
 function NoteCard({
   noteInfo,
@@ -11,6 +12,7 @@ function NoteCard({
 }) {
   const { _id, title, note, priority, isPinned } = noteInfo;
   const { notes, setNotes, deleteNote } = useNotes();
+  const { addNoteToArchives } = useArchives();
   const token = localStorage.getItem("token");
 
   function handleTogglePinNote() {
@@ -58,7 +60,10 @@ function NoteCard({
             className="fa-solid fa-pencil"
             onClick={() => handleUpdateNote(_id)}
           ></i>
-          <i className="fa-solid fa-box-archive"></i>
+          <i
+            className="fa-solid fa-box-archive"
+            onClick={() => addNoteToArchives(token, noteInfo, _id)}
+          ></i>
           <i
             className="fa-solid fa-trash-can"
             onClick={() => deleteNote(token, _id)}

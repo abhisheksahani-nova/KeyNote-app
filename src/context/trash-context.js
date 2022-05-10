@@ -8,7 +8,7 @@ const TrashProvider = ({ children }) => {
 
   const addNoteToTrash = async (token, id) => {
     try {
-      const response = await axios.post(`/api/trash/:${id}`, {
+      const response = await axios.post(`/api/trash/${id}`, {
         headers: { authorization: token },
       });
 
