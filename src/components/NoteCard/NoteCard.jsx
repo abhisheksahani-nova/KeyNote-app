@@ -58,7 +58,13 @@ function NoteCard({
           <small className="note-label-priority">Health</small>
           <small className="note-label-priority"> {priority} </small>
         </div>
-        <div className="d-flex note-footer note-icons-container">
+        <div
+          className={`d-flex note-footer ${
+            location.pathname == "/archives"
+              ? "archivenote-icons-container"
+              : "note-icons-container"
+          } `}
+        >
           {location.pathname !== "/archives" && (
             <i
               className="fa-solid fa-pencil"
