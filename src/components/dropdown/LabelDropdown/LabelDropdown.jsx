@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import "./LabelDropdown.css";
 import { useLabels } from "../../../context/labels-context";
 
-function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
+function LabelDropdown({
+  setIsLabelDropdownOpen,
+  setIsSelectLabelDropdownOpen,
+  isAddNewLabel,
+  noteData,
+  setNoteData,
+}) {
   const [label, setLabel] = useState("");
   const token = localStorage.getItem("token");
   const { labels, setLabels } = useLabels();
@@ -11,6 +17,15 @@ function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
     if (label) {
       setLabels([...labels, label]);
       setLabel("");
+    }
+  }
+
+  function handleAddLabelToNote(e, label) {
+    if (e.target.checked) {
+      setNoteData({ ...noteData, tags: [...noteData.tags, label] });
+    } else {
+      const filterLabel = noteData.tags.filter((tag) => tag !== label);
+      setNoteData({ ...noteData, tags: [...filterLabel] });
     }
   }
 
@@ -26,10 +41,14 @@ function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
             !isAddNewLabel && "mb-1"
           }`}
         >
-          <h5>Add labels</h5>
+          <h5> {isAddNewLabel ? "Add labels" : "Label note"} </h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
-            onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+            onClick={() =>
+              isAddNewLabel
+                ? setIsLabelDropdownOpen((prev) => !prev)
+                : setIsSelectLabelDropdownOpen((prev) => !prev)
+            }
           ></i>
         </li>
 
@@ -62,8 +81,14 @@ function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
                   key={label}
                   className="d-flex li-item playlist-li-item cursor-p align-item-center"
                 >
-                  <input type="checkbox" />
-                  <label className="ml-1 select-label-fontsize break-word" htmlFor="">
+                  <input
+                    type="checkbox"
+                    onClick={(e) => handleAddLabelToNote(e, label)}
+                  />
+                  <label
+                    className="ml-1 select-label-fontsize break-word"
+                    htmlFor=""
+                  >
                     {label}
                   </label>
                 </li>

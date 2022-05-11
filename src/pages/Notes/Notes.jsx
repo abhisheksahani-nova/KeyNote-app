@@ -11,7 +11,8 @@ import TextareaAutosize from "react-textarea-autosize";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
-  const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen ] = useState(false);
+  const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen] =
+    useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
@@ -20,6 +21,7 @@ function Notes() {
     note: "",
     priority: "low",
     isPinned: false,
+    tags: [],
   });
 
   const { notes, addNewNote, updateNote } = useNotes();
@@ -60,11 +62,13 @@ function Notes() {
           />
         )}
 
-        {isLabelDropdownOpen && (
+        {isSelectLabelDropdownOpen && (
           <LabelDropdown
             setIsLabelDropdownOpen={setIsLabelDropdownOpen}
             setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
             isAddNewLabel={false}
+            noteData={noteData}
+            setNoteData={setNoteData}
           />
         )}
 
@@ -113,7 +117,12 @@ function Notes() {
                       <option value="high">high</option>
                     </select>
                     <i className="fa-solid fa-box-archive"></i>
-                    <i className="fa-solid fa-tag"></i>
+                    <i
+                      className="fa-solid fa-tag"
+                      onClick={() =>
+                        setIsSelectLabelDropdownOpen((prev) => !prev)
+                      }
+                    ></i>
                     <i className="fa-solid fa-trash-can"></i>
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">

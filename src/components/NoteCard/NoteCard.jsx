@@ -11,7 +11,7 @@ function NoteCard({
   setIsUpdateNote,
   setOpenCreateNote,
 }) {
-  const { _id, title, note, priority, isPinned } = noteInfo;
+  const { _id, title, note, priority, isPinned, tags } = noteInfo;
   const { notes, setNotes, deleteNote } = useNotes();
   const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
     useArchives();
