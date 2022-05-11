@@ -21,7 +21,11 @@ function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
           isAddNewLabel ? "add-new-label-dropdown" : "select-label-dropdown"
         }`}
       >
-        <li className="d-flex li-item playlist-li-item j-space-between border-none">
+        <li
+          className={`d-flex li-item playlist-li-item j-space-between border-none ${
+            !isAddNewLabel && "mb-1"
+          }`}
+        >
           <h5>Add labels</h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
@@ -29,26 +33,42 @@ function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
           ></i>
         </li>
 
-        <li className="d-flex li-item playlist-li-item border-none">
-          <input
-            type="text"
-            placeholder="Create new label"
-            className="playlist-dropdown-inp"
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
-          />
-        </li>
+        {isAddNewLabel && (
+          <li className="d-flex li-item playlist-li-item border-none">
+            <input
+              type="text"
+              placeholder="Create new label"
+              className="playlist-dropdown-inp"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+            />
+          </li>
+        )}
 
-        {labels?.map((label) => {
-          return (
-            <li
-              key={label}
-              className="d-flex li-item playlist-li-item cursor-p"
-            >
-              <h5 className="ml-1">{label}</h5>
-            </li>
-          );
-        })}
+        {isAddNewLabel
+          ? labels?.map((label) => {
+              return (
+                <li
+                  key={label}
+                  className="d-flex li-item playlist-li-item cursor-p"
+                >
+                  <h5 className="ml-1 break-word">{label}</h5>
+                </li>
+              );
+            })
+          : labels?.map((label) => {
+              return (
+                <li
+                  key={label}
+                  className="d-flex li-item playlist-li-item cursor-p align-item-center"
+                >
+                  <input type="checkbox" />
+                  <label className="ml-1 select-label-fontsize break-word" htmlFor="">
+                    {label}
+                  </label>
+                </li>
+              );
+            })}
 
         <li className="d-flex li-item playlist-li-item j-content-right border-none">
           <button

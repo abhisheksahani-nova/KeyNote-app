@@ -19,6 +19,7 @@
   color: var(--gray-shade3);
   display: grid;
   position: fixed;
+  width: 14rem;
 }
 
 .add-new-label-dropdown {
@@ -66,4 +67,16 @@
 
 .p-small {
   padding: 0.5rem;
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.select-label-fontsize {
+  font-size: 0.8rem;
+}
+
+.break-word{
+  word-break: break-word;
 }

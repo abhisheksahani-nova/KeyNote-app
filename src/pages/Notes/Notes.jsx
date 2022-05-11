@@ -11,6 +11,7 @@ import TextareaAutosize from "react-textarea-autosize";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen ] = useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
@@ -52,7 +53,19 @@ function Notes() {
       <section className="d-flex">
         <Sidebar />
         {isLabelDropdownOpen && (
-          <LabelDropdown setIsLabelDropdownOpen={setIsLabelDropdownOpen} isAddNewLabel={true} />
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
+            isAddNewLabel={true}
+          />
+        )}
+
+        {isLabelDropdownOpen && (
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
+            isAddNewLabel={false}
+          />
         )}
 
         <div className="notes-container">
