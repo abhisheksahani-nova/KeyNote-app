@@ -53,9 +53,14 @@ function NoteCard({
 
       <small>{note}</small>
 
-      <div className="d-flex note-footer mt-2">
+      <div className="d-flex mt-1 flex-wrap flex-gap-small">
+        {tags.map((tag) => {
+          return <small className="note-label-priority"> {tag} </small>;
+        })}
+      </div>
+
+      <div className="d-flex note-footer mt-1">
         <div className="d-flex note-footer note-label-priority-container">
-          <small className="note-label-priority">Health</small>
           <small className="note-label-priority"> {priority} </small>
         </div>
         <div

@@ -46,7 +46,13 @@ function Notes() {
     }
 
     setOpenCreateNote((prev) => !prev);
-    setNoteData({ title: "", note: "", priority: "low", isPinned: false });
+    setNoteData({
+      title: "",
+      note: "",
+      priority: "low",
+      isPinned: false,
+      tags: [],
+    });
   }
 
   return (
