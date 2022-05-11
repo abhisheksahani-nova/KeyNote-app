@@ -1,7 +1,10 @@
 import React from "react";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <nav className="nav-bar white mb-0 nav-border-bottom">
       <div className="nav-innerContainer font-clr">
@@ -18,6 +21,10 @@ function Navbar() {
           type="text"
         />
       </div>
+
+      <button className="btn mr-2" onClick={() => navigate("/signup")}>
+        Signup
+      </button>
     </nav>
   );
 }
