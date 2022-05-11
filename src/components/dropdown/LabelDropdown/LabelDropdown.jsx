@@ -8,8 +8,10 @@ function LabelDropdown({ setIsLabelDropdownOpen }) {
   const { labels, setLabels } = useLabels();
 
   function handleAddNewLabel() {
-    setLabels([...labels, label]);
-    setLabel("");
+    if (label) {
+      setLabels([...labels, label]);
+      setLabel("");
+    }
   }
 
   return (
