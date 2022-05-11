@@ -52,7 +52,7 @@ function Notes() {
       <section className="d-flex">
         <Sidebar />
         {isLabelDropdownOpen && (
-          <LabelDropdown setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+          <LabelDropdown setIsLabelDropdownOpen={setIsLabelDropdownOpen} isAddNewLabel={true} />
         )}
 
         <div className="notes-container">
@@ -87,7 +87,7 @@ function Notes() {
                 />
 
                 <div className="d-flex note-footer mt-2">
-                  <div className="d-flex note-footer note-icons-container create-note-footer-icons-container">
+                  <div className="d-flex note-footer create-note-footer-icons-container">
                     <select
                       onChange={(e) =>
                         setNoteData({ ...noteData, priority: e.target.value })
@@ -100,6 +100,7 @@ function Notes() {
                       <option value="high">high</option>
                     </select>
                     <i className="fa-solid fa-box-archive"></i>
+                    <i className="fa-solid fa-tag"></i>
                     <i className="fa-solid fa-trash-can"></i>
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">

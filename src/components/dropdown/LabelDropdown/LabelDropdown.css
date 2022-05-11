@@ -19,8 +19,17 @@
   color: var(--gray-shade3);
   display: grid;
   position: fixed;
+}
+
+.add-new-label-dropdown {
   top: 35%;
   right: 45%;
+}
+
+.select-label-dropdown {
+  top: 16.5rem;
+  left: 35.8rem;
+  box-shadow: 0 0 6px var(--gray-shade5);
 }
 
 .playlist-li-item {
@@ -55,6 +64,6 @@
   margin-right: 5px;
 }
 
-.p-small{
+.p-small {
   padding: 0.5rem;
 }

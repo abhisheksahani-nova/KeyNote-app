@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./LabelDropdown.css";
 import { useLabels } from "../../../context/labels-context";
 
-function LabelDropdown({ setIsLabelDropdownOpen }) {
+function LabelDropdown({ setIsLabelDropdownOpen, isAddNewLabel }) {
   const [label, setLabel] = useState("");
   const token = localStorage.getItem("token");
   const { labels, setLabels } = useLabels();
@@ -15,8 +15,12 @@ function LabelDropdown({ setIsLabelDropdownOpen }) {
   }
 
   return (
-    <div className="playlist-dropdown-container">
-      <ul className="stacked-list list-style-none playlist-stacklist p-small">
+    <div className={`${isAddNewLabel && "playlist-dropdown-container"}`}>
+      <ul
+        className={`stacked-list list-style-none playlist-stacklist p-small ${
+          isAddNewLabel ? "add-new-label-dropdown" : "select-label-dropdown"
+        }`}
+      >
         <li className="d-flex li-item playlist-li-item j-space-between border-none">
           <h5>Add labels</h5>
           <i
