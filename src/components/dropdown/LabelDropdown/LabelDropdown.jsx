@@ -44,18 +44,6 @@ function LabelDropdown({
     setIsUpdateChecked((prev) => !prev);
   }
 
-  // function handleUpdateNoteLabelsChecked(label, position) {
-  //   console.log(label, "function working");
-  //   for (let tag of updateNoteLabels) {
-  //     if (tag == label) {
-  //       console.log(`tag = ${tag} and label = ${label}`);
-  //       setCheckedState((prev, index) => (index == position ? true : prev));
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
   function handleAddNewLabel() {
     if (label) {
       setLabels([...labels, label]);
@@ -69,7 +57,6 @@ function LabelDropdown({
     );
 
     setCheckedState(updatedCheckedState);
-    console.log(updatedCheckedState, e.target.checked);
 
     if (e.target.checked) {
       setNoteData({ ...noteData, tags: [...noteData.tags, label] });
@@ -81,7 +68,6 @@ function LabelDropdown({
 
   return (
     <div className={`${isAddNewLabel && "playlist-dropdown-container"}`}>
-      {console.log(checkedState)}
       <ul
         className={`stacked-list list-style-none playlist-stacklist p-small ${
           isAddNewLabel ? "add-new-label-dropdown" : "select-label-dropdown"

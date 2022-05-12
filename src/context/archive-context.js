@@ -20,7 +20,6 @@ const ArchivesProvider = ({ children }) => {
 
       setArchives(response.data.archives);
       setNotes(response.data.notes);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +37,6 @@ const ArchivesProvider = ({ children }) => {
 
       setArchives(response.data.archives);
       setNotes(response.data.notes);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +49,6 @@ const ArchivesProvider = ({ children }) => {
       });
 
       setArchives(response.data.archives);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

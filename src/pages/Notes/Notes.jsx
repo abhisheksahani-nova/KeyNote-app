@@ -39,7 +39,6 @@ function Notes() {
 
   function handleSaveNote(token, noteData, noteId) {
     if (isUpdateNote) {
-      console.log(noteData);
       updateNote(token, noteData, noteId);
       setIsUpdateNote((prev) => !prev);
     } else {
@@ -137,7 +136,7 @@ function Notes() {
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
                       onClick={() => setOpenCreateNote((prev) => !prev)}
-                      className="btn btn-outline btn-small-size"
+                      className="btn btn-outline btn-small-size pri-outline-btn"
                     >
                       Close
                     </button>
@@ -160,7 +159,7 @@ function Notes() {
             )}
 
             <button
-              className="btn pri-btn-style mr-1"
+              className="btn pri-btn-style pri-outline-btn mr-1"
               onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
             >
               <i class="fa-solid fa-plus"></i> Add label

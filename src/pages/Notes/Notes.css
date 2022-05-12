@@ -28,9 +28,20 @@
 }
 
 .pri-btn-style {
-  background-color: #efd345;
+  background-color: var(--note-pri-clr);
   padding: 0.7rem;
   outline: none;
+}
+
+.pri-outline-btn {
+  background-color: var(--light-clr);
+  color: var(--note-pri-clr);
+  border: 1px solid var(--note-pri-clr);
+}
+
+.pri-outline-btn:hover {
+  background-color: var(--note-pri-clr);
+  color: var(--light-clr);
 }
 
 .btn-small-size {
