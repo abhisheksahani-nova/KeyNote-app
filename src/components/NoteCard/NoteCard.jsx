@@ -35,6 +35,7 @@ function NoteCard({
       note: findNoteToUpdate[0].note,
       priority: findNoteToUpdate[0].priority,
       isPinned: findNoteToUpdate[0].isPinned,
+      tags: findNoteToUpdate[0].tags,
     });
     setNoteId(id);
     setOpenCreateNote((prev) => !prev);

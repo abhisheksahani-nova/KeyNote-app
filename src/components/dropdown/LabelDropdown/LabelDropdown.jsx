@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./LabelDropdown.css";
 import { useLabels } from "../../../context/labels-context";
+import { useNotes } from "../../../context/notes-context";
 
 function LabelDropdown({
   setIsLabelDropdownOpen,
@@ -8,10 +9,52 @@ function LabelDropdown({
   isAddNewLabel,
   noteData,
   setNoteData,
+  noteId,
+  isUpdateNote,
 }) {
   const [label, setLabel] = useState("");
+  const [isUpdateChecked, setIsUpdateChecked] = useState(true);
   const token = localStorage.getItem("token");
   const { labels, setLabels } = useLabels();
+  const { notes } = useNotes();
+  const [checkedState, setCheckedState] = useState(
+    new Array(labels.length).fill(false)
+  );
+
+  function findUpdateNote() {
+    const findNoteToUpdate = notes.filter((note) => note._id == noteId);
+    return findNoteToUpdate[0]?.tags;
+  }
+
+  if (isUpdateNote && isUpdateChecked) {
+    const updateNoteLabels = findUpdateNote();
+    const updateNoteCheckedState = [];
+
+    for (let label of labels) {
+      let checkedFlag = false;
+      for (let updateLabel of updateNoteLabels) {
+        if (label == updateLabel) {
+          checkedFlag = true;
+        }
+      }
+      updateNoteCheckedState.push(checkedFlag);
+    }
+
+    setCheckedState(updateNoteCheckedState);
+    setIsUpdateChecked((prev) => !prev);
+  }
+
+  // function handleUpdateNoteLabelsChecked(label, position) {
+  //   console.log(label, "function working");
+  //   for (let tag of updateNoteLabels) {
+  //     if (tag == label) {
+  //       console.log(`tag = ${tag} and label = ${label}`);
+  //       setCheckedState((prev, index) => (index == position ? true : prev));
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   function handleAddNewLabel() {
     if (label) {
@@ -20,7 +63,14 @@ function LabelDropdown({
     }
   }
 
-  function handleAddLabelToNote(e, label) {
+  function handleAddLabelToNote(e, label, position) {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index == position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+    console.log(updatedCheckedState, e.target.checked);
+
     if (e.target.checked) {
       setNoteData({ ...noteData, tags: [...noteData.tags, label] });
     } else {
@@ -31,6 +81,7 @@ function LabelDropdown({
 
   return (
     <div className={`${isAddNewLabel && "playlist-dropdown-container"}`}>
+      {console.log(checkedState)}
       <ul
         className={`stacked-list list-style-none playlist-stacklist p-small ${
           isAddNewLabel ? "add-new-label-dropdown" : "select-label-dropdown"
@@ -75,7 +126,7 @@ function LabelDropdown({
                 </li>
               );
             })
-          : labels?.map((label) => {
+          : labels?.map((label, index) => {
               return (
                 <li
                   key={label}
@@ -83,7 +134,8 @@ function LabelDropdown({
                 >
                   <input
                     type="checkbox"
-                    onClick={(e) => handleAddLabelToNote(e, label)}
+                    checked={checkedState[index]}
+                    onClick={(e) => handleAddLabelToNote(e, label, index)}
                   />
                   <label
                     className="ml-1 select-label-fontsize break-word"
@@ -95,14 +147,16 @@ function LabelDropdown({
               );
             })}
 
-        <li className="d-flex li-item playlist-li-item j-content-right border-none">
-          <button
-            className="btn pri-cta-bg-clr playlist-create-btn-resize"
-            onClick={() => handleAddNewLabel()}
-          >
-            Add
-          </button>
-        </li>
+        {isAddNewLabel && (
+          <li className="d-flex li-item playlist-li-item j-content-right border-none">
+            <button
+              className="btn pri-cta-bg-clr playlist-create-btn-resize"
+              onClick={() => handleAddNewLabel()}
+            >
+              Add
+            </button>
+          </li>
+        )}
       </ul>
     </div>
   );

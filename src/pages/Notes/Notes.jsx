@@ -39,6 +39,7 @@ function Notes() {
 
   function handleSaveNote(token, noteData, noteId) {
     if (isUpdateNote) {
+      console.log(noteData);
       updateNote(token, noteData, noteId);
       setIsUpdateNote((prev) => !prev);
     } else {
@@ -75,6 +76,8 @@ function Notes() {
             isAddNewLabel={false}
             noteData={noteData}
             setNoteData={setNoteData}
+            noteId={noteId}
+            isUpdateNote={isUpdateNote}
           />
         )}
 

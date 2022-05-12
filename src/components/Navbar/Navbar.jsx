@@ -22,8 +22,8 @@ function Navbar() {
         />
       </div>
 
-      <button className="btn mr-2" onClick={() => navigate("/signup")}>
-        Signup
+      <button className="btn mr-2" onClick={() => navigate("/login")}>
+        Login
       </button>
     </nav>
   );
