@@ -1,9 +1,9 @@
 .add-note-inp {
-  width: 30rem;
+  width: 35rem;
   border-radius: 5px;
   padding: 0.8rem;
-  margin-right: 14rem;
-  margin-left: 13rem;
+  margin-right: 12rem;
+  margin-left: 12rem;
 }
 
 .notes-container {
@@ -29,4 +29,59 @@
 
 .pri-btn-style {
   background-color: #efd345;
+  padding: 0.7rem;
+}
+
+.btn-small-size {
+  padding: 0.5rem 0.7rem;
+}
+
+.create-note-container {
+  width: 35rem;
+  border: 1px solid var(--gray-shade5);
+  padding: 1rem;
+  margin-right: 12rem;
+  margin-left: 12rem;
+  border-radius: 8px;
+}
+
+.title-inp-container {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-title-inp {
+  width: 95%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.create-note-textarea {
+  width: 95%;
+  resize: none;
+  height: max-content;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.create-note-btn-container {
+  width: 8.5rem;
+}
+
+.create-note-footer-icons-container {
+  width: 9rem;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.note-priority-dropdown {
+  border: 1px solid var(--gray-shade5);
+  outline: none;
+  width: 4.5rem;
+  border-radius: 3px;
 }

@@ -1,7 +1,10 @@
 import React from "react";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <nav className="nav-bar white mb-0 nav-border-bottom">
       <div className="nav-innerContainer font-clr">
@@ -19,28 +22,9 @@ function Navbar() {
         />
       </div>
 
-      <div className="nav-innerContainer nav-icon-container width-reset inherit-clr mr-1">
-        <div className="flex-col-center">
-          <a className="font-clr" href="#">
-            <i className="fa-solid fa-heart"></i>
-          </a>
-          <small>Wishlist</small>
-        </div>
-
-        <div className="flex-col-center">
-          <a className="font-clr" href="#">
-            <i className="fa-solid fa-user"></i>
-          </a>
-          <small>Profile</small>
-        </div>
-
-        <div className="flex-col-center">
-          <a className="font-clr nav-icon" href="#">
-            <i className="fa-solid fa-cart-shopping"></i>
-          </a>
-          <small>Cart</small>
-        </div>
-      </div>
+      <button className="btn mr-2" onClick={() => navigate("/signup")}>
+        Signup
+      </button>
     </nav>
   );
 }

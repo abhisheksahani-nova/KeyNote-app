@@ -20,7 +20,7 @@
 }
 
 .nav-input-container {
-  margin-right: 7rem;
+  margin-right: 3rem;
 }
 
 .border-none {
@@ -30,4 +30,8 @@
 .nav-heading-restyle {
   font-size: 1.4rem;
   font-weight: 400;
+}
+
+.mr-2 {
+  margin-right: 2rem;
 }
