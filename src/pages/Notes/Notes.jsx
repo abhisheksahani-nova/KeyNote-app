@@ -87,6 +87,11 @@ function Notes() {
       );
     }
 
+    if (state.labels.length) {
+      filteredNotes = filteredNotes.filter(({ tags }) =>
+        tags.some(tag => state.labels.includes(tag))
+      );
+    }
     return filteredNotes;
   }
 
@@ -131,7 +136,6 @@ function Notes() {
   return (
     <div>
       <Navbar />
-      {console.log(noteData)}
       <section className="d-flex">
         <Sidebar />
         {isLabelDropdownOpen && (

@@ -1,7 +1,10 @@
 import React from "react";
 import "./FilterModal.css";
+import { useLabels } from "../../../context/labels-context";
 
 function FilterModal({ filterDispatch, filterState, setOpenFilterModal }) {
+  const { labels } = useLabels();
+
   return (
     <div className={`playlist-dropdown-container`}>
       <div
@@ -52,14 +55,22 @@ function FilterModal({ filterDispatch, filterState, setOpenFilterModal }) {
 
           <h5 className="filter-input-heading mb-1">Filter by labels</h5>
           <div className="d-flex filter-label-container">
-            <div className="d-flex filter-input-container">
-              <input type="checkbox" />
-              <label className="filter-label">Travel</label>
-            </div>
-            <div className="d-flex filter-input-container">
-              <input type="checkbox" />
-              <label className="filter-label">Coding</label>
-            </div>
+            {labels.map((label, index) => {
+              return (
+                <div key={index} className="d-flex filter-input-container">
+                  <input
+                    type="checkbox"
+                    onClick={() =>
+                      filterDispatch({
+                        type: "FILTER_BY_LABELS",
+                        payload: label,
+                      })
+                    }
+                  />
+                  <label className="filter-label"> {label} </label>
+                </div>
+              );
+            })}
           </div>
         </div>
 
