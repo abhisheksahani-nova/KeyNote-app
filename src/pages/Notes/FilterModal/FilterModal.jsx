@@ -1,27 +1,38 @@
 import React from "react";
 import "./FilterModal.css";
 
-function FilterModal() {
+function FilterModal({ filterDispatch, filterState, setOpenFilterModal }) {
   return (
     <div className={`playlist-dropdown-container`}>
       <div
         className={`playlist-stacklist p-1 filter-modal-position  filter-modal-container`}
       >
-        <div className={`d-flex j-space-between filter-heading-container mb-1`}>
+        <div className={`d-flex j-space-between filter-heading-container mb-2`}>
           <h4 className="filter-heading m-bottom-small"> Filter </h4>
-          <i className="fa-solid fa-rectangle-xmark cursor-p"></i>
+          <i
+            className="fa-solid fa-rectangle-xmark cursor-p"
+            onClick={() => setOpenFilterModal((prev) => !prev)}
+          ></i>
         </div>
 
-        <div className="">
+        <div>
           <h5 className="filter-input-heading mb-1">Sort by priority</h5>
           <div className="d-flex filter-inputs-container">
             <div className="d-flex filter-input-container">
-              <input type="radio" />
+              <input
+                type="radio"
+                checked={filterState.priorityHighToLow}
+                onClick={() => filterDispatch({ type: "PRIORITY_HIGH_TO_LOW" })}
+              />
               <label className="filter-label">High to low</label>
             </div>
 
             <div className="d-flex filter-input-container">
-              <input type="radio" />
+              <input
+                type="radio"
+                checked={filterState.priorityLowToHigh}
+                onClick={() => filterDispatch({ type: "PRIORITY_LOW_TO_HIGH" })}
+              />
               <label className="filter-label">Low to high</label>
             </div>
           </div>

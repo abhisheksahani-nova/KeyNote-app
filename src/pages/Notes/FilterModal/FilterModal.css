@@ -3,7 +3,7 @@
 }
 
 .filter-modal-position {
-  top: 20%;
+  top: 10%;
   right: 35%;
 }
 
@@ -13,7 +13,7 @@
 
 .filter-inputs-container {
   gap: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .filter-input-container {

@@ -11,7 +11,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import FilterModal from "./FilterModal/FilterModal";
 
 function Notes() {
-  const [state, dispatch] = useReducer(filterReducer, {
+  const [filterState, filterDispatch] = useReducer(filterReducer, {
     priorityLowToHigh: false,
     priorityHighToLow: false,
     labels: [],
@@ -70,6 +70,24 @@ function Notes() {
   function otherNotes() {
     let temp = notes;
     return temp.filter((note) => !note.isPinned);
+  }
+
+  function applyFilters(state, getNotes) {
+    let filteredNotes = getNotes();
+
+    if (state.priorityLowToHigh) {
+      filteredNotes = filteredNotes.sort(
+        (a, b) => a.priorityRank - b.priorityRank
+      );
+    }
+
+    if (state.priorityHighToLow) {
+      filteredNotes = filteredNotes.sort(
+        (a, b) => b.priorityRank - a.priorityRank
+      );
+    }
+
+    return filteredNotes;
   }
 
   function handleSaveNote(token, noteData, noteId) {
@@ -136,7 +154,13 @@ function Notes() {
           />
         )}
 
-        {openFilterModal && <FilterModal />}
+        {openFilterModal && (
+          <FilterModal
+            filterDispatch={filterDispatch}
+            filterState={filterState}
+            setOpenFilterModal={setOpenFilterModal}
+          />
+        )}
 
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2">
@@ -234,7 +258,7 @@ function Notes() {
                 PINNED
               </small>
               <div className="d-flex notecard-container">
-                {pinnedNotes().map((pinnedNote) => {
+                {applyFilters(filterState, pinnedNotes).map((pinnedNote) => {
                   return (
                     <NoteCard
                       key={pinnedNote._id}
@@ -253,7 +277,7 @@ function Notes() {
                 OTHERS
               </small>
               <div className="d-flex notecard-container">
-                {otherNotes().map((otherNote) => {
+                {applyFilters(filterState, otherNotes).map((otherNote) => {
                   return (
                     <NoteCard
                       key={otherNote._id}
