@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import {
   Navbar,
   Sidebar,
@@ -11,6 +11,12 @@ import TextareaAutosize from "react-textarea-autosize";
 import FilterModal from "./FilterModal/FilterModal";
 
 function Notes() {
+  const [state, dispatch] = useReducer(filterReducer, {
+    priorityLowToHigh: false,
+    priorityHighToLow: false,
+    labels: [],
+  });
+
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
   const [openFilterModal, setOpenFilterModal] = useState(false);
   const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen] =
@@ -22,12 +28,39 @@ function Notes() {
     title: "",
     note: "",
     priority: "low",
+    priorityRank: 1,
     isPinned: false,
     tags: [],
   });
 
   const { notes, addNewNote, updateNote } = useNotes();
   const token = localStorage.getItem("token");
+
+  function filterReducer(state, action) {
+    switch (action.type) {
+      case "PRIORITY_LOW_TO_HIGH":
+        return {
+          ...state,
+          priorityLowToHigh: !state.priorityLowToHigh,
+          priorityHighToLow: false,
+        };
+
+      case "PRIORITY_HIGH_TO_LOW":
+        return {
+          ...state,
+          priorityHighToLow: !state.priorityHighToLow,
+          priorityLowToHigh: false,
+        };
+
+      case "FILTER_BY_LABELS":
+        return state.labels.includes(action.payload)
+          ? {
+              ...state,
+              labels: state.labels.filter((label) => label !== action.payload),
+            }
+          : { ...state, labels: [...state.labels, action.payload] };
+    }
+  }
 
   function pinnedNotes() {
     let temp = notes;
@@ -52,14 +85,35 @@ function Notes() {
       title: "",
       note: "",
       priority: "low",
+      priorityRank: 1,
       isPinned: false,
       tags: [],
+    });
+  }
+
+  function handlePriorityData(e) {
+    let priority = e.target.value;
+    let priorityRanking;
+
+    if (priority == "high") {
+      priorityRanking = 3;
+    } else if (priority == "medium") {
+      priorityRanking = 2;
+    } else if (priority == "low") {
+      priorityRanking = 1;
+    }
+
+    setNoteData({
+      ...noteData,
+      priority: e.target.value,
+      priorityRank: priorityRanking,
     });
   }
 
   return (
     <div>
       <Navbar />
+      {console.log(noteData)}
       <section className="d-flex">
         <Sidebar />
         {isLabelDropdownOpen && (
@@ -118,9 +172,7 @@ function Notes() {
                 <div className="d-flex note-footer mt-2">
                   <div className="d-flex note-footer create-note-footer-icons-container">
                     <select
-                      onChange={(e) =>
-                        setNoteData({ ...noteData, priority: e.target.value })
-                      }
+                      onChange={(e) => handlePriorityData(e)}
                       value={noteData.priority}
                       className="note-priority-dropdown"
                     >
