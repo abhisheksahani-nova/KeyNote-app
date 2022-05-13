@@ -8,9 +8,11 @@ import {
 import "./Notes.css";
 import { useNotes } from "../../context/notes-context";
 import TextareaAutosize from "react-textarea-autosize";
+import FilterModal from "./FilterModal/FilterModal";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [openFilterModal, setOpenFilterModal] = useState(false);
   const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen] =
     useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
@@ -79,6 +81,8 @@ function Notes() {
             isUpdateNote={isUpdateNote}
           />
         )}
+
+        {openFilterModal && <FilterModal />}
 
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2">
@@ -164,7 +168,10 @@ function Notes() {
             >
               <i class="fa-solid fa-plus"></i> Add label
             </button>
-            <button className="btn pri-btn-style">
+            <button
+              className="btn pri-btn-style"
+              onClick={() => setOpenFilterModal((prev) => !prev)}
+            >
               <i class="fa-solid fa-filter"></i> Filter
             </button>
           </div>

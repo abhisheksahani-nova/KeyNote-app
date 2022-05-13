@@ -1,0 +1,36 @@
+.filter-modal-container {
+  width: 20rem;
+}
+
+.filter-modal-position {
+  top: 20%;
+  right: 35%;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.filter-inputs-container {
+  gap: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-input-container {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-heading{
+  font-size: 1.3rem;
+}
+
+.filter-label {
+  font-size: 0.9rem;
+}
+
+.filter-input-heading {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
