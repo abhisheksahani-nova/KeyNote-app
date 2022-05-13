@@ -21,7 +21,11 @@
   gap: 0.5rem;
 }
 
-.filter-heading{
+.filter-heading-container {
+  border-bottom: 1px solid var(--gray-shade5);
+}
+
+.filter-heading {
   font-size: 1.3rem;
 }
 
@@ -30,7 +34,15 @@
 }
 
 .filter-input-heading {
-  font-size: 1rem;
+  font-size: 0.93rem;
   font-weight: 500;
 }
 
+.m-bottom-small {
+  margin-bottom: 0.5rem;
+}
+
+.filter-label-container{
+  flex-direction: column;
+  gap: 0.5rem;
+}

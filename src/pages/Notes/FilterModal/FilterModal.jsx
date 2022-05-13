@@ -7,8 +7,8 @@ function FilterModal() {
       <div
         className={`playlist-stacklist p-1 filter-modal-position  filter-modal-container`}
       >
-        <div className={`d-flex j-space-between border-none mb-2`}>
-          <h4> Filter </h4>
+        <div className={`d-flex j-space-between filter-heading-container mb-1`}>
+          <h4 className="filter-heading m-bottom-small"> Filter </h4>
           <i className="fa-solid fa-rectangle-xmark cursor-p"></i>
         </div>
 
@@ -39,33 +39,25 @@ function FilterModal() {
             </div>
           </div>
 
-          <h5>Filter by labels</h5>
-          <div className="">
-            <div className="">
+          <h5 className="filter-input-heading mb-1">Filter by labels</h5>
+          <div className="d-flex filter-label-container">
+            <div className="d-flex filter-input-container">
               <input type="checkbox" />
               <label className="filter-label">Travel</label>
             </div>
-            <div className="">
+            <div className="d-flex filter-input-container">
               <input type="checkbox" />
               <label className="filter-label">Coding</label>
             </div>
           </div>
         </div>
 
-        {/* <li className="d-flex li-item playlist-li-item border-none">
-          <input
-            type="text"
-            placeholder="Create new label"
-            className="playlist-dropdown-inp"
-          />
-        </li> */}
-
         <div className="d-flex li-item playlist-li-item j-content-right border-none">
           <button
             className="btn pri-cta-bg-clr playlist-create-btn-resize"
             onClick={() => handleAddNewLabel()}
           >
-            Add
+            Clear Filters
           </button>
         </div>
       </div>
