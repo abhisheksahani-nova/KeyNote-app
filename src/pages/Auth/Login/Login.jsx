@@ -5,8 +5,8 @@ import "./Login.css";
 
 function Login() {
   const [userLoginData, setUserLoginData] = useState({
-    email: "",
-    password: "",
+    email: "adarshbalika@gmail.com",
+    password: "adarshBalika123",
   });
   const [passwordInputType, setPasswordInputType] = useState("password");
 

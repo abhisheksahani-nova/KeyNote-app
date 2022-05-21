@@ -1,6 +1,8 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import "./NoteCard.css";
 import { useNotes } from "../../context/notes-context";
+import { useArchives } from "../../context/archive-context";
 
 function NoteCard({
   noteInfo,
@@ -9,9 +11,12 @@ function NoteCard({
   setIsUpdateNote,
   setOpenCreateNote,
 }) {
-  const { _id, title, note, priority, isPinned } = noteInfo;
+  const { _id, title, note, priority, isPinned, tags } = noteInfo;
   const { notes, setNotes, deleteNote } = useNotes();
+  const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
+    useArchives();
   const token = localStorage.getItem("token");
+  const location = useLocation();
 
   function handleTogglePinNote() {
     const tempNotes = notes;
@@ -30,6 +35,7 @@ function NoteCard({
       note: findNoteToUpdate[0].note,
       priority: findNoteToUpdate[0].priority,
       isPinned: findNoteToUpdate[0].isPinned,
+      tags: findNoteToUpdate[0].tags,
     });
     setNoteId(id);
     setOpenCreateNote((prev) => !prev);
@@ -48,20 +54,51 @@ function NoteCard({
 
       <small>{note}</small>
 
-      <div className="d-flex note-footer mt-2">
+      <div className="d-flex mt-1 flex-wrap flex-gap-small">
+        {tags.map((tag) => {
+          return <small className="note-label-priority"> {tag} </small>;
+        })}
+      </div>
+
+      <div className="d-flex note-footer mt-1">
         <div className="d-flex note-footer note-label-priority-container">
-          <small className="note-label-priority">Health</small>
           <small className="note-label-priority"> {priority} </small>
         </div>
-        <div className="d-flex note-footer note-icons-container">
-          <i
-            className="fa-solid fa-pencil"
-            onClick={() => handleUpdateNote(_id)}
-          ></i>
-          <i className="fa-solid fa-box-archive"></i>
+        <div
+          className={`d-flex note-footer ${
+            location.pathname == "/archives"
+              ? "archivenote-icons-container"
+              : "note-icons-container"
+          } `}
+        >
+          {location.pathname !== "/archives" && (
+            <i
+              className="fa-solid fa-pencil"
+              onClick={() => handleUpdateNote(_id)}
+            ></i>
+          )}
+
+          {location.pathname !== "/archives" && (
+            <i
+              className="fa-solid fa-box-archive"
+              onClick={() => addNoteToArchives(token, noteInfo, _id)}
+            ></i>
+          )}
+
+          {location.pathname == "/archives" && (
+            <i
+              className="fa-solid fa-window-restore"
+              onClick={() => restoreNoteFromArchives(token, _id)}
+            ></i>
+          )}
+
           <i
             className="fa-solid fa-trash-can"
-            onClick={() => deleteNote(token, _id)}
+            onClick={() =>
+              location.pathname == "/archives"
+                ? deleteNoteFromArchives(token, _id)
+                : deleteNote(token, _id)
+            }
           ></i>
         </div>
       </div>

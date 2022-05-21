@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Navbar, Sidebar, NoteCard } from "../../components/index";
+import {
+  Navbar,
+  Sidebar,
+  NoteCard,
+  LabelDropdown,
+} from "../../components/index";
 import "./Notes.css";
 import { useNotes } from "../../context/notes-context";
 import TextareaAutosize from "react-textarea-autosize";
 
 function Notes() {
+  const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen] =
+    useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
@@ -13,6 +21,7 @@ function Notes() {
     note: "",
     priority: "low",
     isPinned: false,
+    tags: [],
   });
 
   const { notes, addNewNote, updateNote } = useNotes();
@@ -31,12 +40,19 @@ function Notes() {
   function handleSaveNote(token, noteData, noteId) {
     if (isUpdateNote) {
       updateNote(token, noteData, noteId);
+      setIsUpdateNote((prev) => !prev);
     } else {
       addNewNote(token, noteData);
     }
 
     setOpenCreateNote((prev) => !prev);
-    setNoteData({ title: "", note: "", priority: "low", isPinned: false });
+    setNoteData({
+      title: "",
+      note: "",
+      priority: "low",
+      isPinned: false,
+      tags: [],
+    });
   }
 
   return (
@@ -44,6 +60,25 @@ function Notes() {
       <Navbar />
       <section className="d-flex">
         <Sidebar />
+        {isLabelDropdownOpen && (
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
+            isAddNewLabel={true}
+          />
+        )}
+
+        {isSelectLabelDropdownOpen && (
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
+            isAddNewLabel={false}
+            noteData={noteData}
+            setNoteData={setNoteData}
+            noteId={noteId}
+            isUpdateNote={isUpdateNote}
+          />
+        )}
 
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2">
@@ -77,7 +112,7 @@ function Notes() {
                 />
 
                 <div className="d-flex note-footer mt-2">
-                  <div className="d-flex note-footer note-icons-container create-note-footer-icons-container">
+                  <div className="d-flex note-footer create-note-footer-icons-container">
                     <select
                       onChange={(e) =>
                         setNoteData({ ...noteData, priority: e.target.value })
@@ -90,12 +125,18 @@ function Notes() {
                       <option value="high">high</option>
                     </select>
                     <i className="fa-solid fa-box-archive"></i>
+                    <i
+                      className="fa-solid fa-tag"
+                      onClick={() =>
+                        setIsSelectLabelDropdownOpen((prev) => !prev)
+                      }
+                    ></i>
                     <i className="fa-solid fa-trash-can"></i>
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
                       onClick={() => setOpenCreateNote((prev) => !prev)}
-                      className="btn btn-outline btn-small-size"
+                      className="btn btn-outline btn-small-size pri-outline-btn"
                     >
                       Close
                     </button>
@@ -117,10 +158,17 @@ function Notes() {
               />
             )}
 
+            <button
+              className="btn pri-btn-style pri-outline-btn mr-1"
+              onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+            >
+              <i class="fa-solid fa-plus"></i> Add label
+            </button>
             <button className="btn pri-btn-style">
               <i class="fa-solid fa-filter"></i> Filter
             </button>
           </div>
+
           <div>
             <div>
               <small className="font-size-small ml-1 f-weight-500">

@@ -2,8 +2,8 @@
   width: 35rem;
   border-radius: 5px;
   padding: 0.8rem;
-  margin-right: 12rem;
-  margin-left: 12rem;
+  margin-right: 11rem;
+  margin-left: 8rem;
 }
 
 .notes-container {
@@ -28,8 +28,20 @@
 }
 
 .pri-btn-style {
-  background-color: #efd345;
+  background-color: var(--note-pri-clr);
   padding: 0.7rem;
+  outline: none;
+}
+
+.pri-outline-btn {
+  background-color: var(--light-clr);
+  color: var(--note-pri-clr);
+  border: 1px solid var(--note-pri-clr);
+}
+
+.pri-outline-btn:hover {
+  background-color: var(--note-pri-clr);
+  color: var(--light-clr);
 }
 
 .btn-small-size {
@@ -40,8 +52,8 @@
   width: 35rem;
   border: 1px solid var(--gray-shade5);
   padding: 1rem;
-  margin-right: 12rem;
-  margin-left: 12rem;
+  margin-right: 11rem;
+  margin-left: 8rem;
   border-radius: 8px;
 }
 
@@ -72,7 +84,7 @@
 }
 
 .create-note-footer-icons-container {
-  width: 9rem;
+  width: 11rem;
 }
 
 .align-items-start {
