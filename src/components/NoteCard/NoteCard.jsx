@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./NoteCard.css";
 import { useNotes } from "../../context/notes-context";
 import { useArchives } from "../../context/archive-context";
+import { useTrash } from "../../context/trash-context";
 
 function NoteCard({
   noteInfo,
@@ -15,6 +16,8 @@ function NoteCard({
   const { notes, setNotes, deleteNote } = useNotes();
   const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
     useArchives();
+
+  const { addNoteToTrash } = useTrash();
   const token = localStorage.getItem("token");
   const location = useLocation();
 

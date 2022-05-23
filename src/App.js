@@ -1,5 +1,5 @@
 import React from "react";
-import { Notes, Login, Signup, Archives } from "./pages/index";
+import { Notes, Login, Signup, Archives, Trash } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
 
@@ -11,6 +11,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/archives" element={<Archives />}></Route>
+        <Route path="/trash" element={<Trash />}></Route>
         <Route path="/mock" element={<Mockman />}></Route>
       </Routes>
     </div>
