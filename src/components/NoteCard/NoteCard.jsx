@@ -12,8 +12,8 @@ function NoteCard({
   setIsUpdateNote,
   setOpenCreateNote,
 }) {
-  const { _id, title, note, priority, createdAt, tags , noteColor} = noteInfo;
-  const { notes, setNotes, deleteNote, addNewNote } = useNotes();
+  const { _id, title, note, priority, createdAt, tags, noteColor } = noteInfo;
+  const { notes, setNotes, deleteNote, addNewNote, updateNote } = useNotes();
   const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
     useArchives();
 
@@ -22,13 +22,12 @@ function NoteCard({
   const token = localStorage.getItem("token");
   const location = useLocation();
 
-  function handleTogglePinNote() {
+  function handleTogglePinNote(token, _id) {
     const tempNotes = notes;
     const findNote = tempNotes.find((note) => note._id === _id);
     const togglePinNote = { ...findNote, isPinned: !findNote.isPinned };
-    const filterPinNote = tempNotes.filter((note) => note._id !== _id);
-    filterPinNote.push(togglePinNote);
-    setNotes([...filterPinNote]);
+
+    updateNote(token, togglePinNote, _id);
   }
 
   function handleUpdateNote(id) {
@@ -63,7 +62,7 @@ function NoteCard({
         <h4> {title} </h4>
         <i
           className="fa-solid fa-thumbtack"
-          onClick={() => handleTogglePinNote()}
+          onClick={() => handleTogglePinNote(token, _id)}
         ></i>
       </div>
 
