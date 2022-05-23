@@ -12,7 +12,7 @@ function NoteCard({
   setIsUpdateNote,
   setOpenCreateNote,
 }) {
-  const { _id, title, note, priority, createdAt, tags } = noteInfo;
+  const { _id, title, note, priority, createdAt, tags , noteColor} = noteInfo;
   const { notes, setNotes, deleteNote, addNewNote } = useNotes();
   const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
     useArchives();
@@ -58,7 +58,7 @@ function NoteCard({
   }
 
   return (
-    <div className="note-container">
+    <div className={`note-container ${noteColor && noteColor}`}>
       <div className="d-flex note-title-container">
         <h4> {title} </h4>
         <i

@@ -11,6 +11,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import FilterModal from "./FilterModal/FilterModal";
 import { formatDate } from "../../backend/utils/authUtils";
 import { useFilter, applyFilters } from "../../reducer/filterReducer";
+import ColorSelector from "./ColorSelector/ColorSelector";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
@@ -18,6 +19,7 @@ function Notes() {
   const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen] =
     useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
+  const [showColorSelector, setShowColorSelector] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
   const [noteData, setNoteData] = useState({
@@ -28,6 +30,7 @@ function Notes() {
     isPinned: false,
     tags: [],
     createdAt: formatDate(),
+    noteColor: "",
   });
 
   const { notes, addNewNote, updateNote } = useNotes();
@@ -61,6 +64,7 @@ function Notes() {
       isPinned: false,
       tags: [],
       createdAt: formatDate(),
+      noteColor: "",
     });
   }
 
@@ -120,7 +124,7 @@ function Notes() {
         )}
 
         <div className="notes-container">
-          <div className="d-flex align-items-start mb-2">
+          <div className="d-flex align-items-start mb-2 p-relative">
             {openCreateNote ? (
               <div className="create-note-container">
                 <div className="d-flex title-inp-container mb-2">
@@ -140,6 +144,13 @@ function Notes() {
                     }
                   ></i>
                 </div>
+
+                {showColorSelector && (
+                  <ColorSelector
+                    noteData={noteData}
+                    setNoteData={setNoteData}
+                  />
+                )}
 
                 <TextareaAutosize
                   className="create-note-textarea"
@@ -161,14 +172,16 @@ function Notes() {
                       <option value="medium">medium</option>
                       <option value="high">high</option>
                     </select>
-                    <i className="fa-solid fa-box-archive"></i>
                     <i
                       className="fa-solid fa-tag"
                       onClick={() =>
                         setIsSelectLabelDropdownOpen((prev) => !prev)
                       }
                     ></i>
-                    <i className="fa-solid fa-trash-can"></i>
+                    <i
+                      class="fa-solid fa-palette"
+                      onClick={() => setShowColorSelector((prev) => !prev)}
+                    ></i>
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button

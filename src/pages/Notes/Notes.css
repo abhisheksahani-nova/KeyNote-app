@@ -84,7 +84,7 @@
 }
 
 .create-note-footer-icons-container {
-  width: 11rem;
+  width: 9rem;
 }
 
 .align-items-start {
@@ -96,4 +96,24 @@
   outline: none;
   width: 4.5rem;
   border-radius: 3px;
+}
+
+.notecard-bg-blue {
+  background-color: #aecbfa;
+}
+
+.notecard-bg-brown {
+  background-color: #e6c9a8;
+}
+
+.notecard-bg-pink {
+  background-color: #fdcfe8;
+}
+
+.notecard-bg-green {
+  background-color: #ccff90;
+}
+
+.notecard-bg-yellow {
+  background-color: #fff475;
 }
