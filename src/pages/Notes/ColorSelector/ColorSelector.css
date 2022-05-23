@@ -15,34 +15,34 @@
 .color-selector-container div:nth-child(1) {
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #aecbfa;
+  background-color: var(--notecard-bg-blue);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(2) {
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #e6c9a8;
+  background-color: var(--notecard-bg-brown);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(3) {
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #fdcfe8;
+  background-color: var(--notecard-bg-pink);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(4) {
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #ccff90;
+  background-color: var(--notecard-bg-green);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(5) {
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #fff475;
+  background-color: var(--notecard-bg-yellow);
   border-radius: 50%;
 }

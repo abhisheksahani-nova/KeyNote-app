@@ -99,21 +99,21 @@
 }
 
 .notecard-bg-blue {
-  background-color: #aecbfa;
+  background-color: var(--notecard-bg-blue);
 }
 
 .notecard-bg-brown {
-  background-color: #e6c9a8;
+  background-color: var(--notecard-bg-brown);
 }
 
 .notecard-bg-pink {
-  background-color: #fdcfe8;
+  background-color: var(--notecard-bg-pink);
 }
 
 .notecard-bg-green {
-  background-color: #ccff90;
+  background-color: var(--notecard-bg-green);
 }
 
 .notecard-bg-yellow {
-  background-color: #fff475;
+  background-color: var(--notecard-bg-yellow);
 }
