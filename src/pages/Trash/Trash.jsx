@@ -4,12 +4,7 @@ import { Navbar, Sidebar, NoteCard } from "../../components/index";
 import { useTrash } from "../../context/trash-context";
 
 function Trash() {
-  const { trash, getAllTrashNotes } = useTrash();
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    getAllTrashNotes(token);
-  }, []);
+  const { trash} = useTrash();
 
   return (
     <div>

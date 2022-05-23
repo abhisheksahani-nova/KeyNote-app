@@ -13,11 +13,12 @@ function NoteCard({
   setOpenCreateNote,
 }) {
   const { _id, title, note, priority, isPinned, tags } = noteInfo;
-  const { notes, setNotes, deleteNote } = useNotes();
+  const { notes, setNotes, deleteNote, addNewNote } = useNotes();
   const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
     useArchives();
 
-  const { addNoteToTrash } = useTrash();
+  const { addNoteToTrash, deleteNoteFromTrash, restoreNoteFromTrash } =
+    useTrash();
   const token = localStorage.getItem("token");
   const location = useLocation();
 
@@ -44,6 +45,16 @@ function NoteCard({
     setNoteId(id);
     setOpenCreateNote((prev) => !prev);
     setIsUpdateNote((prev) => !prev);
+  }
+
+  function handleRestoreNoteFromTrash(noteInfo, token) {
+    restoreNoteFromTrash(noteInfo);
+    addNewNote(token, noteInfo);
+  }
+
+  function handleAddNoteToTrash(noteInfo,_id ,token){
+    addNoteToTrash(noteInfo)
+    deleteNote(token,_id)
   }
 
   return (
@@ -75,24 +86,28 @@ function NoteCard({
               : "note-icons-container"
           } `}
         >
-          {location.pathname !== "/archives" && (
+          {location.pathname == "/" && (
             <i
               className="fa-solid fa-pencil"
               onClick={() => handleUpdateNote(_id)}
             ></i>
           )}
 
-          {location.pathname !== "/archives" && (
+          {location.pathname == "/" && (
             <i
               className="fa-solid fa-box-archive"
               onClick={() => addNoteToArchives(token, noteInfo, _id)}
             ></i>
           )}
 
-          {location.pathname == "/archives" && (
+          {location.pathname !== "/" && (
             <i
               className="fa-solid fa-window-restore"
-              onClick={() => restoreNoteFromArchives(token, _id)}
+              onClick={() =>
+                location.pathname == "/archives"
+                  ? restoreNoteFromArchives(token, _id)
+                  : handleRestoreNoteFromTrash(noteInfo, token)
+              }
             ></i>
           )}
 
@@ -101,7 +116,9 @@ function NoteCard({
             onClick={() =>
               location.pathname == "/archives"
                 ? deleteNoteFromArchives(token, _id)
-                : deleteNote(token, _id)
+                : location.pathname == "/"
+                ? handleAddNoteToTrash(noteInfo,_id ,token)
+                : deleteNoteFromTrash(_id)
             }
           ></i>
         </div>

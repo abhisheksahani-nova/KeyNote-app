@@ -1,67 +1,34 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
-import { useNotes } from "./notes-context";
+import { useNotes, deleteNote } from "./notes-context";
 
 const TrashContext = createContext();
 
 const TrashProvider = ({ children }) => {
   const [trash, setTrash] = useState([]);
-  const { setNotes } = useNotes();
+  const { setNotes, notes } = useNotes();
 
-  const getAllTrashNotes = async (token) => {
+  const addNoteToTrash = async (noteInfo) => {
     try {
-      const response = await axios.get(`/api/trash`, {
-        headers: { authorization: token },
-      });
-      console.log(response)
+      setTrash([...trash, noteInfo]);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const addNoteToTrash = async (token, noteId) => {
+  const restoreNoteFromTrash = async (noteInfo) => {
     try {
-      const response = await axios.post(
-        `/api/trash/${noteId}`,
-        {},
-        {
-          headers: { authorization: token },
-        }
-      );
-
-      console.log(response)
-
-      setTrash(response.data.trash);
-      setNotes(response.data.notes);
+      const removedNote = trash.filter((note) => note._id !== noteInfo._id);
+      setTrash(removedNote);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const restoreNoteFromTrash = async (token, noteId) => {
+  const deleteNoteFromTrash = async (id) => {
     try {
-      const response = await axios.post(
-        `/api/trash/restore/${noteId}`,
-        {},
-        {
-          headers: { authorization: token },
-        }
-      );
-
-      setTrash(response.data.trash);
-      setNotes(response.data.notes);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteNoteFromTrash = async (token, id) => {
-    try {
-      const response = await axios.delete(`/api/trash/delete/${id}`, {
-        headers: { authorization: token },
-      });
-
-      setTrash(response.data.trash);
+      const removedNote = trash.filter((note) => note._id !== id);
+      setTrash(removedNote);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +42,6 @@ const TrashProvider = ({ children }) => {
         addNoteToTrash,
         restoreNoteFromTrash,
         deleteNoteFromTrash,
-        getAllTrashNotes
       }}
     >
       {children}
