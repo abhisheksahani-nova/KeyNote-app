@@ -43,12 +43,20 @@ function FilterModal({ filterDispatch, filterState, setOpenFilterModal }) {
           <h5 className="filter-input-heading mb-1">Sort by date</h5>
           <div className="d-flex filter-inputs-container">
             <div className="d-flex filter-input-container">
-              <input type="radio" />
+              <input
+                type="radio"
+                checked={filterState.sortByLatestDate}
+                onClick={() => filterDispatch({ type: "SORT_DATE_BY_LATEST" })}
+              />
               <label className="filter-label">Latest</label>
             </div>
 
             <div className="d-flex filter-input-container">
-              <input type="radio" />
+              <input
+                type="radio"
+                checked={filterState.sortByOldDate}
+                onClick={() => filterDispatch({ type: "SORT_DATE_BY_OLDEST" })}
+              />
               <label className="filter-label">Old</label>
             </div>
           </div>
@@ -77,7 +85,7 @@ function FilterModal({ filterDispatch, filterState, setOpenFilterModal }) {
         <div className="d-flex li-item playlist-li-item j-content-right border-none">
           <button
             className="btn pri-cta-bg-clr playlist-create-btn-resize"
-            onClick={() => handleAddNewLabel()}
+            onClick={() => filterDispatch({ type: "CLEAR_ALL_FILTERS" })}
           >
             Clear Filters
           </button>

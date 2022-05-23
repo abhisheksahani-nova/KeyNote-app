@@ -12,7 +12,7 @@ function NoteCard({
   setIsUpdateNote,
   setOpenCreateNote,
 }) {
-  const { _id, title, note, priority, isPinned, tags } = noteInfo;
+  const { _id, title, note, priority, createdAt, tags } = noteInfo;
   const { notes, setNotes, deleteNote, addNewNote } = useNotes();
   const { addNoteToArchives, deleteNoteFromArchives, restoreNoteFromArchives } =
     useArchives();
@@ -52,9 +52,9 @@ function NoteCard({
     addNewNote(token, noteInfo);
   }
 
-  function handleAddNoteToTrash(noteInfo,_id ,token){
-    addNoteToTrash(noteInfo)
-    deleteNote(token,_id)
+  function handleAddNoteToTrash(noteInfo, _id, token) {
+    addNoteToTrash(noteInfo);
+    deleteNote(token, _id);
   }
 
   return (
@@ -70,6 +70,8 @@ function NoteCard({
       <small>{note}</small>
 
       <div className="d-flex mt-1 flex-wrap flex-gap-small">
+        <small className="note-label-priority"> {priority} </small>
+
         {tags.map((tag) => {
           return <small className="note-label-priority"> {tag} </small>;
         })}
@@ -77,7 +79,7 @@ function NoteCard({
 
       <div className="d-flex note-footer mt-1">
         <div className="d-flex note-footer note-label-priority-container">
-          <small className="note-label-priority"> {priority} </small>
+          <small className="note-label-priority"> {createdAt} </small>
         </div>
         <div
           className={`d-flex note-footer ${
@@ -117,7 +119,7 @@ function NoteCard({
               location.pathname == "/archives"
                 ? deleteNoteFromArchives(token, _id)
                 : location.pathname == "/"
-                ? handleAddNoteToTrash(noteInfo,_id ,token)
+                ? handleAddNoteToTrash(noteInfo, _id, token)
                 : deleteNoteFromTrash(_id)
             }
           ></i>
