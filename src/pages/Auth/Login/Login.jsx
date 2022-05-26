@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
+import { toast } from "react-toastify";
 
 function Login() {
   const [userLoginData, setUserLoginData] = useState({
@@ -18,9 +19,10 @@ function Login() {
         const response = await axios.post("/api/auth/login", userLoginData);
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("email", userLoginData.email);
+        toast("Successfully login", { type: "success" });
         navigate("/");
       } catch (error) {
-        console.log(error);
+        toast("Fail to login", { type: "error" });
       }
     })();
   }
@@ -88,10 +90,7 @@ function Login() {
 
         <div className="inp-container mb-1">
           <div className="d-flex login_checkbox_inp_container">
-            <input
-              type="checkbox"
-              id="checkbox-termsPolicy"
-            />
+            <input type="checkbox" id="checkbox-termsPolicy" />
             <label className="inp-label login-checkbox-label-size inherit-clr">
               Remember Me
             </label>

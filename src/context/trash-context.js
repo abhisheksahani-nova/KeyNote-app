@@ -1,18 +1,17 @@
-import axios from "axios";
 import { createContext, useContext, useState } from "react";
-import { useNotes, deleteNote } from "./notes-context";
+import { toast } from "react-toastify";
 
 const TrashContext = createContext();
 
 const TrashProvider = ({ children }) => {
   const [trash, setTrash] = useState([]);
-  const { setNotes, notes } = useNotes();
 
   const addNoteToTrash = async (noteInfo) => {
     try {
       setTrash([...trash, noteInfo]);
+      toast("Note added to trash", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to add note to trash", { type: "error" });
     }
   };
 
@@ -20,8 +19,9 @@ const TrashProvider = ({ children }) => {
     try {
       const removedNote = trash.filter((note) => note._id !== noteInfo._id);
       setTrash(removedNote);
+      toast("Note restored from trash", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to restore note", { type: "error" });
     }
   };
 
@@ -29,8 +29,9 @@ const TrashProvider = ({ children }) => {
     try {
       const removedNote = trash.filter((note) => note._id !== id);
       setTrash(removedNote);
+      toast("Note deleted", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to delete note", { type: "error" });
     }
   };
 

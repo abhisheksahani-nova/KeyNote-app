@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Signup() {
   const [userSignupData, setUserSignupData] = useState({
@@ -31,9 +32,10 @@ function Signup() {
           `${userSignupData.firstName} ${userSignupData.lastName}`
         );
         localStorage.setItem("email", userSignupData.email);
+        toast("Successfully signup", { type: "success" });
         navigate("/");
       } catch (error) {
-        console.log(error);
+        toast("Fail to signup", { type: "error" });
       }
     })();
   }
@@ -172,10 +174,7 @@ function Signup() {
 
           <div className="inp-container mb-1">
             <div className="d-flex login_checkbox_inp_container">
-              <input
-                type="checkbox"
-                id="checkbox-termsPolicy"
-              />
+              <input type="checkbox" id="checkbox-termsPolicy" />
               <label className="inp-label inp-label-required login-checkbox-label-size inherit-clr">
                 I accept all Terms & Conditions
               </label>
