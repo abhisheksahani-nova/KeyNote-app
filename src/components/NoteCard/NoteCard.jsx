@@ -34,6 +34,7 @@ function NoteCard({
       title: findNoteToUpdate[0].title,
       note: findNoteToUpdate[0].note,
       priority: findNoteToUpdate[0].priority,
+      priorityRank: findNoteToUpdate[0].priorityRank,
       isPinned: findNoteToUpdate[0].isPinned,
       tags: findNoteToUpdate[0].tags,
     });
