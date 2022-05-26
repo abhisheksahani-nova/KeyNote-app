@@ -74,6 +74,9 @@ function FilterModal({ filterDispatch, filterState, setOpenFilterModal }) {
                         payload: label,
                       })
                     }
+                    checked={filterState.labels.some(
+                      (filterLabels) => filterLabels == label
+                    )}
                   />
                   <label className="filter-label"> {label} </label>
                 </div>

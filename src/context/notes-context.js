@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 const NotesContext = createContext();
 
@@ -29,8 +30,10 @@ const NotesProvider = ({ children }) => {
       );
 
       setNotes(response.data.notes);
+
+      toast("Note added", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to add note", { type: "error" });
     }
   };
 
@@ -45,8 +48,9 @@ const NotesProvider = ({ children }) => {
       );
 
       setNotes(response.data.notes);
+      toast("Note updated", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to update note", { type: "error" });
     }
   };
 
@@ -57,8 +61,9 @@ const NotesProvider = ({ children }) => {
       });
 
       setNotes(response.data.notes);
+      toast("Note Deleted", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to delete note", { type: "error" });
     }
   };
 
