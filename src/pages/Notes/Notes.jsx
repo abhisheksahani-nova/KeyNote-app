@@ -12,6 +12,7 @@ import FilterModal from "./FilterModal/FilterModal";
 import { formatDate } from "../../backend/utils/authUtils";
 import { useFilter, applyFilters } from "../../reducer/filterReducer";
 import ColorSelector from "./ColorSelector/ColorSelector";
+import Picker from "emoji-picker-react";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
@@ -20,6 +21,7 @@ function Notes() {
     useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
   const [showColorSelector, setShowColorSelector] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
   const [noteData, setNoteData] = useState({
@@ -89,6 +91,17 @@ function Notes() {
 
   const allPinnedNotes = applyFilters(filterState, pinnedNotes);
   const allOtherNotes = applyFilters(filterState, otherNotes);
+
+  function onEmojiClick(event, emojiObject) {
+    setNoteData({ ...noteData, note: noteData.note + emojiObject.emoji });
+  }
+
+  const colorpickerStyle = {
+    width: "18rem",
+    position: "absolute",
+    top: "9.5rem",
+    left: "18rem",
+  };
 
   return (
     <div>
@@ -178,10 +191,23 @@ function Notes() {
                         setIsSelectLabelDropdownOpen((prev) => !prev)
                       }
                     ></i>
+
                     <i
                       class="fa-solid fa-palette"
                       onClick={() => setShowColorSelector((prev) => !prev)}
                     ></i>
+
+                    <i
+                      class="fa-solid fa-face-smile"
+                      onClick={() => setShowEmojiPicker((prev) => !prev)}
+                    ></i>
+
+                    {showEmojiPicker && (
+                      <Picker
+                        onEmojiClick={onEmojiClick}
+                        pickerStyle={colorpickerStyle}
+                      />
+                    )}
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
