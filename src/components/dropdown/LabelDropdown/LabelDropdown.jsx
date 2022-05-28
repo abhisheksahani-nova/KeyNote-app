@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LabelDropdown.css";
 import { useLabels } from "../../../context/labels-context";
 import { useNotes } from "../../../context/notes-context";
+import { toast } from "react-toastify";
 
 function LabelDropdown({
   setIsLabelDropdownOpen,
@@ -48,6 +49,7 @@ function LabelDropdown({
     if (label) {
       setLabels([...labels, label]);
       setLabel("");
+      toast("Label added", { type: "success" });
     }
   }
 

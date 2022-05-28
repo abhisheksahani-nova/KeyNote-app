@@ -9,19 +9,19 @@ import "./Notes.css";
 import { useNotes } from "../../context/notes-context";
 import TextareaAutosize from "react-textarea-autosize";
 import FilterModal from "./FilterModal/FilterModal";
+import { formatDate } from "../../backend/utils/authUtils";
+import { useFilter, applyFilters } from "../../reducer/filterReducer";
+import ColorSelector from "./ColorSelector/ColorSelector";
+import Picker from "emoji-picker-react";
 
 function Notes() {
-  const [filterState, filterDispatch] = useReducer(filterReducer, {
-    priorityLowToHigh: false,
-    priorityHighToLow: false,
-    labels: [],
-  });
-
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
   const [openFilterModal, setOpenFilterModal] = useState(false);
   const [isSelectLabelDropdownOpen, setIsSelectLabelDropdownOpen] =
     useState(false);
   const [openCreateNote, setOpenCreateNote] = useState(false);
+  const [showColorSelector, setShowColorSelector] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
   const [noteData, setNoteData] = useState({
@@ -31,36 +31,13 @@ function Notes() {
     priorityRank: 1,
     isPinned: false,
     tags: [],
+    createdAt: formatDate(),
+    noteColor: "",
   });
 
   const { notes, addNewNote, updateNote } = useNotes();
+  const { filterState, filterDispatch } = useFilter();
   const token = localStorage.getItem("token");
-
-  function filterReducer(state, action) {
-    switch (action.type) {
-      case "PRIORITY_LOW_TO_HIGH":
-        return {
-          ...state,
-          priorityLowToHigh: !state.priorityLowToHigh,
-          priorityHighToLow: false,
-        };
-
-      case "PRIORITY_HIGH_TO_LOW":
-        return {
-          ...state,
-          priorityHighToLow: !state.priorityHighToLow,
-          priorityLowToHigh: false,
-        };
-
-      case "FILTER_BY_LABELS":
-        return state.labels.includes(action.payload)
-          ? {
-              ...state,
-              labels: state.labels.filter((label) => label !== action.payload),
-            }
-          : { ...state, labels: [...state.labels, action.payload] };
-    }
-  }
 
   function pinnedNotes() {
     let temp = notes;
@@ -70,29 +47,6 @@ function Notes() {
   function otherNotes() {
     let temp = notes;
     return temp.filter((note) => !note.isPinned);
-  }
-
-  function applyFilters(state, getNotes) {
-    let filteredNotes = getNotes();
-
-    if (state.priorityLowToHigh) {
-      filteredNotes = filteredNotes.sort(
-        (a, b) => a.priorityRank - b.priorityRank
-      );
-    }
-
-    if (state.priorityHighToLow) {
-      filteredNotes = filteredNotes.sort(
-        (a, b) => b.priorityRank - a.priorityRank
-      );
-    }
-
-    if (state.labels.length) {
-      filteredNotes = filteredNotes.filter(({ tags }) =>
-        tags.some(tag => state.labels.includes(tag))
-      );
-    }
-    return filteredNotes;
   }
 
   function handleSaveNote(token, noteData, noteId) {
@@ -111,6 +65,8 @@ function Notes() {
       priorityRank: 1,
       isPinned: false,
       tags: [],
+      createdAt: formatDate(),
+      noteColor: "",
     });
   }
 
@@ -132,6 +88,20 @@ function Notes() {
       priorityRank: priorityRanking,
     });
   }
+
+  const allPinnedNotes = applyFilters(filterState, pinnedNotes);
+  const allOtherNotes = applyFilters(filterState, otherNotes);
+
+  function onEmojiClick(event, emojiObject) {
+    setNoteData({ ...noteData, note: noteData.note + emojiObject.emoji });
+  }
+
+  const colorpickerStyle = {
+    width: "18rem",
+    position: "absolute",
+    top: "9.5rem",
+    left: "18rem",
+  };
 
   return (
     <div>
@@ -167,7 +137,7 @@ function Notes() {
         )}
 
         <div className="notes-container">
-          <div className="d-flex align-items-start mb-2">
+          <div className="d-flex align-items-start mb-2 p-relative">
             {openCreateNote ? (
               <div className="create-note-container">
                 <div className="d-flex title-inp-container mb-2">
@@ -187,6 +157,13 @@ function Notes() {
                     }
                   ></i>
                 </div>
+
+                {showColorSelector && (
+                  <ColorSelector
+                    noteData={noteData}
+                    setNoteData={setNoteData}
+                  />
+                )}
 
                 <TextareaAutosize
                   className="create-note-textarea"
@@ -208,14 +185,29 @@ function Notes() {
                       <option value="medium">medium</option>
                       <option value="high">high</option>
                     </select>
-                    <i className="fa-solid fa-box-archive"></i>
                     <i
                       className="fa-solid fa-tag"
                       onClick={() =>
                         setIsSelectLabelDropdownOpen((prev) => !prev)
                       }
                     ></i>
-                    <i className="fa-solid fa-trash-can"></i>
+
+                    <i
+                      class="fa-solid fa-palette"
+                      onClick={() => setShowColorSelector((prev) => !prev)}
+                    ></i>
+
+                    <i
+                      class="fa-solid fa-face-smile"
+                      onClick={() => setShowEmojiPicker((prev) => !prev)}
+                    ></i>
+
+                    {showEmojiPicker && (
+                      <Picker
+                        onEmojiClick={onEmojiClick}
+                        pickerStyle={colorpickerStyle}
+                      />
+                    )}
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
@@ -262,7 +254,7 @@ function Notes() {
                 PINNED
               </small>
               <div className="d-flex notecard-container">
-                {applyFilters(filterState, pinnedNotes).map((pinnedNote) => {
+                {allPinnedNotes?.map((pinnedNote) => {
                   return (
                     <NoteCard
                       key={pinnedNote._id}
@@ -281,7 +273,7 @@ function Notes() {
                 OTHERS
               </small>
               <div className="d-flex notecard-container">
-                {applyFilters(filterState, otherNotes).map((otherNote) => {
+                {allOtherNotes.map((otherNote) => {
                   return (
                     <NoteCard
                       key={otherNote._id}

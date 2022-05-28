@@ -24,7 +24,7 @@ function Sidebar() {
           <i className="fa-solid fa-box-archive videolib-drawer-icon"></i>{" "}
           Archive
         </li>
-        <li className="videolib-list-item sidebar-list">
+        <li className="videolib-list-item sidebar-list" onClick={() => navigate("/trash")} >
           <i className="fa-solid fa-trash-can videolib-drawer-icon"></i> Trash
         </li>
         <li className="videolib-list-item sidebar-list">

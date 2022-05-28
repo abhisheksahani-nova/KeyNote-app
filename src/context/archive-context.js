@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import { useNotes } from "./notes-context";
+import { toast } from "react-toastify";
 
 const ArchivesContext = createContext();
 
@@ -20,8 +21,9 @@ const ArchivesProvider = ({ children }) => {
 
       setArchives(response.data.archives);
       setNotes(response.data.notes);
+      toast("Note added to archive", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to add note", { type: "error" });
     }
   };
 
@@ -37,8 +39,9 @@ const ArchivesProvider = ({ children }) => {
 
       setArchives(response.data.archives);
       setNotes(response.data.notes);
+      toast("Note restored from archive", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to restore note", { type: "error" });
     }
   };
 
@@ -49,8 +52,9 @@ const ArchivesProvider = ({ children }) => {
       });
 
       setArchives(response.data.archives);
+      toast("Note deleted from archive", { type: "success" });
     } catch (error) {
-      console.log(error);
+      toast("Fail to delete note", { type: "error" });
     }
   };
 
