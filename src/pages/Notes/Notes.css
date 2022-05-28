@@ -117,3 +117,20 @@
 .notecard-bg-yellow {
   background-color: var(--notecard-bg-yellow);
 }
+
+@media screen and (max-width: 655px) {
+  .notes-container {
+    width: 85%;
+    padding: 2rem 1rem;
+  }
+
+  .add-note-inp {
+    width: 25rem;
+    margin-right: 4rem;
+    margin-left: 7rem;
+  }
+
+  ::placeholder {
+    font-size: 1rem;
+  }
+}

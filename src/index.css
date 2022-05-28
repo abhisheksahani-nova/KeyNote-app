@@ -8,3 +8,31 @@
   --note-bg-light: #f2f2f2;
   --note-border-clr: #dddddd;
 }
+
+html {
+  font-size: 100%;
+}
+
+@media screen and (max-width: 1100px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 67%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  html {
+    font-size: 45%;
+  }
+}

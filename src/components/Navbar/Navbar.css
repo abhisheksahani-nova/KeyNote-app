@@ -35,3 +35,14 @@
 .mr-2 {
   margin-right: 2rem;
 }
+
+@media screen and (max-width: 655px) {
+  .nav-inputbox{
+    width: 30rem;
+  }
+
+  .nav-heading-restyle {
+    margin: 0;
+  }
+  
+}
