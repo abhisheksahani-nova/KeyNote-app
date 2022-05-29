@@ -80,7 +80,9 @@ function LabelDropdown({
             !isAddNewLabel && "mb-1"
           }`}
         >
-          <h5> {isAddNewLabel ? "Add labels" : "Label note"} </h5>
+          <h5 className="add-label-dropdown-title">
+            {isAddNewLabel ? "Add labels" : "Label note"}{" "}
+          </h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
             onClick={() =>

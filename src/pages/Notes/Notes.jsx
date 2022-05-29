@@ -130,7 +130,7 @@ function Notes() {
           />
         )}
 
-        {isSelectLabelDropdownOpen && (
+        {/* {isSelectLabelDropdownOpen && (
           <LabelDropdown
             setIsLabelDropdownOpen={setIsLabelDropdownOpen}
             setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
@@ -140,7 +140,7 @@ function Notes() {
             noteId={noteId}
             isUpdateNote={isUpdateNote}
           />
-        )}
+        )} */}
 
         {openFilterModal && (
           <FilterModal
@@ -176,6 +176,18 @@ function Notes() {
                   <ColorSelector
                     noteData={noteData}
                     setNoteData={setNoteData}
+                  />
+                )}
+
+                {isSelectLabelDropdownOpen && (
+                  <LabelDropdown
+                    setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+                    setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
+                    isAddNewLabel={false}
+                    noteData={noteData}
+                    setNoteData={setNoteData}
+                    noteId={noteId}
+                    isUpdateNote={isUpdateNote}
                   />
                 )}
 
