@@ -34,18 +34,37 @@
   border-radius: 4px;
 }
 
-.note-label{
+.note-label {
   margin-right: 0.5rem;
 }
 
-.mt-1{
+.mt-1 {
   margin-top: 1rem;
 }
 
-.flex-wrap{
+.flex-wrap {
   flex-wrap: wrap;
 }
 
-.flex-gap-small{
+.flex-gap-small {
   gap: 0.3rem;
 }
+
+@media screen and (max-width: 655px) {
+  .note-container {
+    width: 20rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .note-container {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .note-container {
+    width: 18rem;
+  }
+}
+

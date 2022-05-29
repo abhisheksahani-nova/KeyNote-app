@@ -125,12 +125,110 @@
   }
 
   .add-note-inp {
-    width: 25rem;
-    margin-right: 4rem;
+    width: 32rem;
+    margin-right: 3rem;
+    margin-left: 7rem;
+  }
+
+  .create-note-container {
+    width: 32rem;
+    margin-right: 3rem;
     margin-left: 7rem;
   }
 
   ::placeholder {
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .add-note-inp {
+    margin-right: 4rem;
+    margin-left: 1rem;
+  }
+
+  .create-note-container {
+    margin-right: 4rem;
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .notecard-container {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .add-note-inp {
+    margin-right: 1rem;
+  }
+
+  .create-note-container {
+    margin-right: 1rem;
+  }
+
+  .btn-small-size {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .create-note-btn-container {
+    width: 7.8rem;
+  }
+
+  .select-option-sty {
+    font-size: 1rem;
+  }
+
+  .note-priority-dropdown {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .btn-small-size {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.73rem;
+  }
+
+  .create-note-btn-container {
+    width: 5.8rem;
+  }
+
+  .create-note-footer-icons-container {
+    width: 8.2rem;
+  }
+
+  .note-priority-dropdown {
+    font-size: 0.65rem;
+    width: 3.5rem;
+  }
+
+  .select-option-sty {
+    font-size: 0.65rem;
+  }
+
+  ::placeholder {
+    font-size: 0.8rem;
+  }
+
+  .btn-label-responsive-sty {
+    padding: 0.5rem 0.35rem;
+    margin-right: 0.2rem;
+  }
+
+  .btn-filter-responsive-sty {
+    padding: 0.5rem 0.35rem;
+  }
+
+  .notes-btn-icon-resize {
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .notes-container {
+    width: 88%;
+    padding: 2rem 0.5rem;
   }
 }

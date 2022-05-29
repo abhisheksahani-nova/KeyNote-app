@@ -2,7 +2,6 @@ import React from "react";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import useWindowSize from "../../hooks/useWindowSize";
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ function Sidebar() {
 
   return (
     <div className="videolib-drawer-container">
-      {console.log(windowWidth)}
       <ul className="videolib-list">
         <li
           className="videolib-list-item sidebar-list"
