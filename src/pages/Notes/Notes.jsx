@@ -130,18 +130,6 @@ function Notes() {
           />
         )}
 
-        {/* {isSelectLabelDropdownOpen && (
-          <LabelDropdown
-            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
-            setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
-            isAddNewLabel={false}
-            noteData={noteData}
-            setNoteData={setNoteData}
-            noteId={noteId}
-            isUpdateNote={isUpdateNote}
-          />
-        )} */}
-
         {openFilterModal && (
           <FilterModal
             filterDispatch={filterDispatch}

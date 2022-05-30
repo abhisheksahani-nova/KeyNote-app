@@ -68,6 +68,11 @@ function LabelDropdown({
     }
   }
 
+  function handleDeleteLabel(label) {
+    const filterLabel = labels.filter((labelName) => labelName !== label);
+    setLabels(filterLabel);
+  }
+
   return (
     <div className={`${isAddNewLabel && "playlist-dropdown-container"}`}>
       <ul
@@ -81,7 +86,7 @@ function LabelDropdown({
           }`}
         >
           <h5 className="add-label-dropdown-title">
-            {isAddNewLabel ? "Add labels" : "Label note"}{" "}
+            {isAddNewLabel ? "Add labels" : "Label note"}
           </h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
@@ -110,9 +115,13 @@ function LabelDropdown({
               return (
                 <li
                   key={label}
-                  className="d-flex li-item playlist-li-item cursor-p"
+                  className="d-flex li-item playlist-li-item cursor-p j-space-between"
                 >
                   <h5 className="ml-1 break-word">{label}</h5>
+                  <i
+                    class="fa-solid fa-trash-can icon-small"
+                    onClick={() => handleDeleteLabel(label)}
+                  ></i>
                 </li>
               );
             })
@@ -127,10 +136,7 @@ function LabelDropdown({
                     checked={checkedState[index]}
                     onClick={(e) => handleAddLabelToNote(e, label, index)}
                   />
-                  <label
-                    className="ml-1 select-label-fontsize break-word"
-                    htmlFor=""
-                  >
+                  <label className="ml-1 select-label-fontsize break-word">
                     {label}
                   </label>
                 </li>
