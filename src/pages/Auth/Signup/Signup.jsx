@@ -11,6 +11,7 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
+  const [checkSignup, setCheckSignup] = useState(false);
   const [passwordInputType, setPasswordInputType] = useState("password");
   const [confirmPasswordInputType, setConfirmPasswordInputType] =
     useState("password");
@@ -18,26 +19,32 @@ function Signup() {
   const navigate = useNavigate();
 
   function handleSignup() {
-    const userData = {
-      email: userSignupData.email,
-      password: userSignupData.password,
-    };
+    setCheckSignup(true);
 
-    (async () => {
-      try {
-        const response = await axios.post("/api/auth/signup", userData);
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem(
-          "username",
-          `${userSignupData.firstName} ${userSignupData.lastName}`
-        );
-        localStorage.setItem("email", userSignupData.email);
-        toast("Successfully signup", { type: "success" });
-        navigate("/");
-      } catch (error) {
-        toast("Fail to signup", { type: "error" });
-      }
-    })();
+    if (
+      userSignupData.firstName &&
+      userSignupData.lastName &&
+      userSignupData.email &&
+      userSignupData.password &&
+      userSignupData.confirmPassword &&
+      userSignupData.password == userSignupData.confirmPassword
+    ) {
+      (async () => {
+        try {
+          const response = await axios.post("/api/auth/signup", userSignupData);
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem(
+            "username",
+            `${userSignupData.firstName} ${userSignupData.lastName}`
+          );
+          localStorage.setItem("email", userSignupData.email);
+          toast("Successfully signup", { type: "success" });
+          navigate("/");
+        } catch (error) {
+          toast("Fail to signup", { type: "error" });
+        }
+      })();
+    }
   }
 
   return (
@@ -55,13 +62,23 @@ function Signup() {
               id="inp-email"
               placeholder="Enter your first name"
               value={userSignupData.firstName}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   firstName: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
+
+            {!userSignupData.firstName && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your first name
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -73,13 +90,23 @@ function Signup() {
               id="inp-email"
               placeholder="Enter your last name"
               value={userSignupData.lastName}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   lastName: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
+
+            {!userSignupData.lastName && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your last name
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -91,17 +118,20 @@ function Signup() {
               id="inp-email"
               placeholder="Enter your email address"
               value={userSignupData.email}
-              onChange={(e) =>
-                setUserSignupData({ ...userSignupData, email: e.target.value })
-              }
+              onChange={(e) => {
+                setUserSignupData({ ...userSignupData, email: e.target.value });
+                setCheckSignup(false);
+              }}
             />
 
-            <div className="err-msg-container d-none">
-              <span>
-                <i className="fa fa-exclamation-circle err-icon"></i>Enter your
-                email address!
-              </span>
-            </div>
+            {!userSignupData.email && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your email address!
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1 p-relative">
@@ -114,12 +144,13 @@ function Signup() {
               id="inp-password"
               placeholder="Enter password"
               value={userSignupData.password}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   password: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
 
             {passwordInputType == "password" ? (
@@ -134,12 +165,14 @@ function Signup() {
               ></i>
             )}
 
-            <div className="err-msg-container d-none">
-              <span>
-                <i className="fa fa-exclamation-circle err-icon"></i>Enter your
-                password!
-              </span>
-            </div>
+            {!userSignupData.password && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your password!
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -152,12 +185,13 @@ function Signup() {
               id="inp-email"
               placeholder="Enter your password again"
               value={userSignupData.confirmPassword}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   confirmPassword: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
             {confirmPasswordInputType == "password" ? (
               <i
@@ -170,6 +204,15 @@ function Signup() {
                 onClick={() => setConfirmPasswordInputType("password")}
               ></i>
             )}
+
+            {!userSignupData.confirmPassword && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your confirm password
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -178,13 +221,6 @@ function Signup() {
               <label className="inp-label inp-label-required login-checkbox-label-size inherit-clr">
                 I accept all Terms & Conditions
               </label>
-            </div>
-
-            <div className="err-msg-container d-none">
-              <span>
-                <i className="fa fa-exclamation-circle err-icon"></i>Accept our
-                terms & policy before going forward!
-              </span>
             </div>
           </div>
 
