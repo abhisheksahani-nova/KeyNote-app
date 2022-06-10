@@ -4,11 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  function handleAuth() {
+    if (token) {
+      localStorage.clear();
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }
 
   return (
     <nav className="nav-bar white mb-0 nav-border-bottom">
       <div className="nav-innerContainer font-clr">
-        <h2 className="nav-heading mr-4 nav-heading-restyle">Note</h2>
+        <h2 className="nav-heading mr-4 nav-heading-restyle">KeyNote</h2>
       </div>
 
       <div className="nav-innerContainer font-clr width-auto nav-input-container">
@@ -22,8 +32,11 @@ function Navbar() {
         />
       </div>
 
-      <button className="btn pri-btn-style mr-2 login-btn" onClick={() => navigate("/login")}>
-        Login
+      <button
+        className="btn pri-btn-style mr-2 login-btn"
+        onClick={() => handleAuth()}
+      >
+        {token ? "Logout" : "Login"}
       </button>
     </nav>
   );

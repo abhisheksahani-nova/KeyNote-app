@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Notes, Login, Signup, Archives, Trash } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -9,6 +9,10 @@ function App() {
   if (typeof window !== "undefined") {
     injectStyle();
   }
+
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   return (
     <div>
