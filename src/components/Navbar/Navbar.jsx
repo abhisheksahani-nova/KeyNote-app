@@ -22,7 +22,7 @@ function Navbar() {
         />
       </div>
 
-      <button className="btn pri-btn-style mr-2" onClick={() => navigate("/login")}>
+      <button className="btn pri-btn-style mr-2 login-btn" onClick={() => navigate("/login")}>
         Login
       </button>
     </nav>

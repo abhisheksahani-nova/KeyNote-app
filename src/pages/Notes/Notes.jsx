@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   Sidebar,
@@ -38,6 +38,20 @@ function Notes() {
   const { notes, addNewNote, updateNote } = useNotes();
   const { filterState, filterDispatch } = useFilter();
   const token = localStorage.getItem("token");
+
+  const [windowWidth, setWindowWidth] = useState();
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   function pinnedNotes() {
     let temp = notes;
@@ -116,18 +130,6 @@ function Notes() {
           />
         )}
 
-        {isSelectLabelDropdownOpen && (
-          <LabelDropdown
-            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
-            setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
-            isAddNewLabel={false}
-            noteData={noteData}
-            setNoteData={setNoteData}
-            noteId={noteId}
-            isUpdateNote={isUpdateNote}
-          />
-        )}
-
         {openFilterModal && (
           <FilterModal
             filterDispatch={filterDispatch}
@@ -165,6 +167,18 @@ function Notes() {
                   />
                 )}
 
+                {isSelectLabelDropdownOpen && (
+                  <LabelDropdown
+                    setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+                    setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
+                    isAddNewLabel={false}
+                    noteData={noteData}
+                    setNoteData={setNoteData}
+                    noteId={noteId}
+                    isUpdateNote={isUpdateNote}
+                  />
+                )}
+
                 <TextareaAutosize
                   className="create-note-textarea"
                   placeholder="Take a note..."
@@ -181,9 +195,11 @@ function Notes() {
                       value={noteData.priority}
                       className="note-priority-dropdown"
                     >
-                      <option value="low">low</option>
-                      <option value="medium">medium</option>
-                      <option value="high">high</option>
+                      <optgroup className="select-option-sty">
+                        <option value="low">low</option>
+                        <option value="medium">medium</option>
+                        <option value="high">high</option>
+                      </optgroup>
                     </select>
                     <i
                       className="fa-solid fa-tag"
@@ -234,17 +250,33 @@ function Notes() {
               />
             )}
 
+            {windowWidth < 655 ? (
+              <button
+                className="btn pri-btn-style pri-outline-btn mr-1 btn-label-responsive-sty"
+                onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+              >
+                <i class="fa-solid fa-list-check notes-btn-icon-resize"></i>
+              </button>
+            ) : (
+              <button
+                className="btn pri-btn-style pri-outline-btn mr-1"
+                onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+              >
+                Add label
+              </button>
+            )}
+
             <button
-              className="btn pri-btn-style pri-outline-btn mr-1"
-              onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
-            >
-              <i class="fa-solid fa-plus"></i> Add label
-            </button>
-            <button
-              className="btn pri-btn-style"
+              className={`btn pri-btn-style btn-filter-responsive-sty ${
+                windowWidth <= 500 && "pri-outline-btn"
+              }`}
               onClick={() => setOpenFilterModal((prev) => !prev)}
             >
-              <i class="fa-solid fa-filter"></i> Filter
+              {windowWidth > 500 ? (
+                "Filter"
+              ) : (
+                <i class="fa-solid fa-filter notes-btn-icon-resize"></i>
+              )}
             </button>
           </div>
 

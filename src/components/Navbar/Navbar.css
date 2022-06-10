@@ -35,3 +35,46 @@
 .mr-2 {
   margin-right: 2rem;
 }
+
+@media screen and (max-width: 655px) {
+  .nav-inputbox{
+    width: 30rem;
+  }
+
+  .nav-heading-restyle {
+    margin: 0;
+  }
+  
+}
+
+@media screen and (max-width: 575px) {
+  .nav-inputbox{
+    width: 23rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-inputbox{
+    width: 20rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nav-inputbox{
+    width: 17rem;
+  }
+
+  .nav-input-container {
+    margin-right: 0;
+  }
+
+  .login-btn{
+    margin-right: 3px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .nav-inputbox{
+    width: 12rem;
+  }
+}
