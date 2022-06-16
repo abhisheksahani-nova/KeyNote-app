@@ -4,8 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import Mockman from "mockman-js";
+import { useNotes } from "./context/notes-context";
 
 function App() {
+  const { theme } = useNotes();
+
   if (typeof window !== "undefined") {
     injectStyle();
   }
@@ -15,7 +18,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="app" data-theme={theme}>
       <Routes>
         <Route path="/" element={<Notes />}></Route>
         <Route path="/login" element={<Login />}></Route>

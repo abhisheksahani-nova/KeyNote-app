@@ -36,31 +36,34 @@
   margin-right: 2rem;
 }
 
+.nav-inp-dark-clr {
+  background-color: var(--note-nav-inp-dark-clr);
+}
+
 @media screen and (max-width: 655px) {
-  .nav-inputbox{
+  .nav-inputbox {
     width: 30rem;
   }
 
   .nav-heading-restyle {
     margin: 0;
   }
-  
 }
 
 @media screen and (max-width: 575px) {
-  .nav-inputbox{
+  .nav-inputbox {
     width: 23rem;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .nav-inputbox{
+  .nav-inputbox {
     width: 20rem;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .nav-inputbox{
+  .nav-inputbox {
     width: 17rem;
   }
 
@@ -68,13 +71,13 @@
     margin-right: 0;
   }
 
-  .login-btn{
+  .login-btn {
     margin-right: 3px;
   }
 }
 
 @media screen and (max-width: 340px) {
-  .nav-inputbox{
+  .nav-inputbox {
     width: 12rem;
   }
 }

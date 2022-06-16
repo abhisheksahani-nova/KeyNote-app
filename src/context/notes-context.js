@@ -1,11 +1,16 @@
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 const NotesContext = createContext();
 
 const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const getNotes = async (token) => {
     try {
@@ -69,7 +74,16 @@ const NotesProvider = ({ children }) => {
 
   return (
     <NotesContext.Provider
-      value={{ notes, setNotes, getNotes, addNewNote, updateNote, deleteNote }}
+      value={{
+        notes,
+        setNotes,
+        getNotes,
+        addNewNote,
+        updateNote,
+        deleteNote,
+        theme,
+        setTheme,
+      }}
     >
       {children}
     </NotesContext.Provider>

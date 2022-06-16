@@ -57,12 +57,16 @@
   border-radius: 0 20px 20px 0;
 }
 
+.dark-theme-font-clr {
+  color: var(--text-primary);
+}
+
 @media screen and (max-width: 655px) {
-  .videolib-drawer-container{
+  .videolib-drawer-container {
     width: 13%;
   }
 
-  .videolib-drawer-icon{
+  .videolib-drawer-icon {
     font-size: 1.4rem;
   }
 
@@ -72,11 +76,11 @@
 }
 
 @media screen and (max-width: 340px) {
-  .videolib-drawer-container{
+  .videolib-drawer-container {
     width: 12%;
   }
 
-  .videolib-drawer-icon{
+  .videolib-drawer-icon {
     font-size: 1.1rem;
   }
 
@@ -84,4 +88,3 @@
     padding: 1rem 1.5rem 2rem;
   }
 }
-

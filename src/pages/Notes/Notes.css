@@ -118,6 +118,10 @@
   background-color: var(--notecard-bg-yellow);
 }
 
+.create-note-inp-dark-clr{
+  background-color: var(--background);
+}
+
 @media screen and (max-width: 655px) {
   .notes-container {
     width: 85%;

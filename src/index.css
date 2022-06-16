@@ -7,6 +7,25 @@
   --notecard-bg-yellow: #fff475;
   --note-bg-light: #f2f2f2;
   --note-border-clr: #dddddd;
+  --note-nav-inp-dark-clr: #1f2223;
+  --background: var(--light-bg-clr);
+  --text-primary: var(--font-clr);
+  --input-bg: ;
+}
+
+[data-theme="dark"] {
+  --background: #0a1825;
+  --text-primary: var(--light-bg-clr);
+  --input-bg: #1f2223;
+  /* --plant-sec-light-clr: white;
+  --text-secondary: white;
+  --text-sec-dark: white; */
+}
+
+.app {
+  background-color: var(--background);
+  color: var(--text-primary);
+  min-height: 100vh;
 }
 
 html {

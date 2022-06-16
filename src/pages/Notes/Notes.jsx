@@ -35,7 +35,7 @@ function Notes() {
     noteColor: "",
   });
 
-  const { notes, addNewNote, updateNote } = useNotes();
+  const { notes, addNewNote, updateNote, theme } = useNotes();
   const { filterState, filterDispatch } = useFilter();
   const token = localStorage.getItem("token");
 
@@ -148,7 +148,9 @@ function Notes() {
                       setNoteData({ ...noteData, title: e.target.value })
                     }
                     value={noteData.title}
-                    className="note-title-inp"
+                    className={`note-title-inp ${
+                      theme == "dark" && "create-note-inp-dark-clr"
+                    }`}
                     type="text"
                     placeholder="Title"
                   />
@@ -244,7 +246,9 @@ function Notes() {
             ) : (
               <input
                 onClick={() => setOpenCreateNote((prev) => !prev)}
-                className="nav_searchBar add-note-inp"
+                className={`nav_searchBar add-note-inp ${
+                  theme == "dark" && "create-note-inp-dark-clr"
+                }`}
                 type="text"
                 placeholder="Take a note..."
               />
