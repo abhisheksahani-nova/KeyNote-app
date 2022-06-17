@@ -1,0 +1,12 @@
+.empty-note-icon-cont {
+  margin-left: calc(100vw / 4);
+  gap: 1.8rem;
+}
+
+.empty-note-icon {
+  font-size: 10rem;
+}
+
+.mt-5 {
+  margin-top: 5rem;
+}

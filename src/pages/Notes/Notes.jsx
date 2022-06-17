@@ -301,46 +301,59 @@ function Notes() {
             </button>
           </div>
 
-          <div>
+          {allPinnedNotes?.length > 0 || allOtherNotes?.length > 0 ? (
             <div>
-              <small className="font-size-small ml-1 f-weight-500">
-                PINNED
-              </small>
-              <div className="d-flex notecard-container">
-                {allPinnedNotes?.map((pinnedNote) => {
-                  return (
-                    <NoteCard
-                      key={pinnedNote._id}
-                      noteInfo={pinnedNote}
-                      setNoteData={setNoteData}
-                      setNoteId={setNoteId}
-                      setIsUpdateNote={setIsUpdateNote}
-                      setOpenCreateNote={setOpenCreateNote}
-                    />
-                  );
-                })}
+              {allPinnedNotes?.length > 0 && (
+                <div>
+                  <small className="font-size-small ml-1 f-weight-500">
+                    PINNED
+                  </small>
+                  <div className="d-flex notecard-container">
+                    {allPinnedNotes?.map((pinnedNote) => {
+                      return (
+                        <NoteCard
+                          key={pinnedNote._id}
+                          noteInfo={pinnedNote}
+                          setNoteData={setNoteData}
+                          setNoteId={setNoteId}
+                          setIsUpdateNote={setIsUpdateNote}
+                          setOpenCreateNote={setOpenCreateNote}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              {allOtherNotes?.length > 0 && (
+                <div>
+                  <small className="font-size-small ml-1 f-weight-500">
+                    OTHERS
+                  </small>
+                  <div className="d-flex notecard-container">
+                    {allOtherNotes.map((otherNote) => {
+                      return (
+                        <NoteCard
+                          key={otherNote._id}
+                          noteInfo={otherNote}
+                          setNoteData={setNoteData}
+                          setNoteId={setNoteId}
+                          setIsUpdateNote={setIsUpdateNote}
+                          setOpenCreateNote={setOpenCreateNote}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="d-flex align-item-center mt-5">
+              <div className="d-flex flex-direction-col gap-1 empty-note-icon-cont">
+                <i class="fa-solid fa-file empty-note-icon"></i>
+                <button className="btn pri-outline-btn">Add notes</button>
               </div>
             </div>
-            <div>
-              <small className="font-size-small ml-1 f-weight-500">
-                OTHERS
-              </small>
-              <div className="d-flex notecard-container">
-                {allOtherNotes.map((otherNote) => {
-                  return (
-                    <NoteCard
-                      key={otherNote._id}
-                      noteInfo={otherNote}
-                      setNoteData={setNoteData}
-                      setNoteId={setNoteId}
-                      setIsUpdateNote={setIsUpdateNote}
-                      setOpenCreateNote={setOpenCreateNote}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
     </div>

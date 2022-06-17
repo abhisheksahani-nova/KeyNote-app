@@ -74,6 +74,10 @@
   align-items: center;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
 .select-label-fontsize {
   font-size: 0.8rem;
 }
