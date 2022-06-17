@@ -141,7 +141,11 @@ function Notes() {
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2 p-relative">
             {openCreateNote ? (
-              <div className="create-note-container">
+              <div
+                className={`create-note-container ${
+                  theme == "dark" && "note-create-inp-border"
+                }`}
+              >
                 <div className="d-flex title-inp-container mb-2">
                   <input
                     onChange={(e) =>
@@ -182,7 +186,9 @@ function Notes() {
                 )}
 
                 <TextareaAutosize
-                  className="create-note-textarea"
+                  className={`create-note-textarea ${
+                    theme == "dark" && "create-note-inp-dark-clr"
+                  }`}
                   placeholder="Take a note..."
                   onChange={(e) =>
                     setNoteData({ ...noteData, note: e.target.value })
@@ -195,7 +201,10 @@ function Notes() {
                     <select
                       onChange={(e) => handlePriorityData(e)}
                       value={noteData.priority}
-                      className="note-priority-dropdown"
+                      className={`note-priority-dropdown ${
+                        theme == "dark" &&
+                        "nav-inp-dark-clr note-create-inp-border white-clr"
+                      }`}
                     >
                       <optgroup className="select-option-sty">
                         <option value="low">low</option>
@@ -230,7 +239,9 @@ function Notes() {
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
                       onClick={() => setOpenCreateNote((prev) => !prev)}
-                      className="btn btn-outline btn-small-size pri-outline-btn"
+                      className={`btn btn-outline btn-small-size pri-outline-btn ${
+                        theme == "dark" && "pri-outline-btn-dark"
+                      }`}
                     >
                       Close
                     </button>
@@ -247,7 +258,8 @@ function Notes() {
               <input
                 onClick={() => setOpenCreateNote((prev) => !prev)}
                 className={`nav_searchBar add-note-inp ${
-                  theme == "dark" && "create-note-inp-dark-clr"
+                  theme == "dark" &&
+                  "create-note-inp-dark-clr note-create-inp-border"
                 }`}
                 type="text"
                 placeholder="Take a note..."
@@ -256,14 +268,18 @@ function Notes() {
 
             {windowWidth < 655 ? (
               <button
-                className="btn pri-btn-style pri-outline-btn mr-1 btn-label-responsive-sty"
+                className={`btn pri-btn-style pri-outline-btn mr-1 btn-label-responsive-sty ${
+                  theme == "dark" && "pri-outline-btn-dark"
+                }`}
                 onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
               >
                 <i class="fa-solid fa-list-check notes-btn-icon-resize"></i>
               </button>
             ) : (
               <button
-                className="btn pri-btn-style pri-outline-btn mr-1"
+                className={`btn pri-btn-style pri-outline-btn mr-1 ${
+                  theme == "dark" && "pri-outline-btn-dark"
+                } `}
                 onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
               >
                 Add label

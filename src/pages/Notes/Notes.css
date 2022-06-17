@@ -44,6 +44,12 @@
   color: var(--light-clr);
 }
 
+.pri-outline-btn-dark {
+  background-color: var(--background);
+  color: var(--note-pri-clr);
+  border: 1px solid var(--note-pri-clr);
+}
+
 .btn-small-size {
   padding: 0.5rem 0.7rem;
 }
@@ -118,8 +124,21 @@
   background-color: var(--notecard-bg-yellow);
 }
 
-.create-note-inp-dark-clr{
+.create-note-inp-dark-clr {
   background-color: var(--background);
+  color: var(--light-clr);
+}
+
+.note-create-inp-border {
+  border: 1px solid var(--note-border-dark-clr);
+}
+
+.white-clr{
+  color: var(--light-clr);
+}
+
+.dark-clr{
+  color: var(--note-nav-inp-dark-clr);
 }
 
 @media screen and (max-width: 655px) {
