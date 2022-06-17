@@ -37,7 +37,7 @@ function Navbar() {
         </span>
         <input
           className={`nav_searchBar nav-inputbox border-none ${
-            theme == "dark" && "nav-inp-dark-clr"
+            theme == "dark" && "nav-inp-dark-clr white-clr"
           }`}
           placeholder="Search"
           type="text"

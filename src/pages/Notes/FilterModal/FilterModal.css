@@ -42,7 +42,20 @@
   margin-bottom: 0.5rem;
 }
 
-.filter-label-container{
+.filter-label-container {
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.modal-dark-theme {
+  background-color: var(--ecommerce-btn-clr);
+  color: var(--text-primary);
+}
+
+.modal-dark-theme::placeholder {
+  color: var(--text-primary);
+}
+
+.pri-btn-bg {
+  background-color: var(--note-pri-clr);
 }

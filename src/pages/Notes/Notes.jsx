@@ -220,12 +220,12 @@ function Notes() {
                     ></i>
 
                     <i
-                      class="fa-solid fa-palette"
+                      className="fa-solid fa-palette"
                       onClick={() => setShowColorSelector((prev) => !prev)}
                     ></i>
 
                     <i
-                      class="fa-solid fa-face-smile"
+                      className="fa-solid fa-face-smile"
                       onClick={() => setShowEmojiPicker((prev) => !prev)}
                     ></i>
 

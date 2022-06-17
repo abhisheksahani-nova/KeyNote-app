@@ -26,7 +26,7 @@ function Sidebar() {
       <ul className="videolib-list">
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "dark-theme-font-clr"
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
           onClick={() => navigate("/")}
         >
@@ -35,7 +35,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "dark-theme-font-clr"
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
         >
           <i className="fa-solid fa-tag videolib-drawer-icon"></i>{" "}
@@ -43,7 +43,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "dark-theme-font-clr"
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
           onClick={() => navigate("/archives")}
         >
@@ -52,7 +52,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "dark-theme-font-clr"
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
           onClick={() => navigate("/trash")}
         >
@@ -61,7 +61,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "dark-theme-font-clr"
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
         >
           <i className="fa-solid fa-pencil videolib-drawer-icon"></i>

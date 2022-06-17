@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import { toast } from "react-toastify";
+import { useNotes } from "../../../context/notes-context";
 
 function Login() {
   const [userLoginData, setUserLoginData] = useState({
@@ -13,6 +14,7 @@ function Login() {
   const [passwordInputType, setPasswordInputType] = useState("password");
 
   const navigate = useNavigate();
+  const { theme } = useNotes();
 
   function handleUserLogin() {
     setCheckLogin(true);
@@ -34,14 +36,20 @@ function Login() {
 
   return (
     <section className="login_form_container d-flex">
-      <div className="card-basic login_form app">
+      <div
+        className={`card-basic login_form ${
+          theme == "dark" && "modal-dark-theme"
+        } `}
+      >
         <h2 className="t-align-center mt-2 mb-2">Login</h2>
         <div className="inp-container mb-1">
           <label className="inp-label d-block inp-label-required login_inp_label_resize inherit-clr">
             Email
           </label>
           <input
-            className={`inp login_inp_resize ecommerce-login-inp `}
+            className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+              theme == "dark" && "modal-dark-theme note-create-inp-border"
+            }`}
             id="inp-email"
             placeholder="Enter your email"
             value={userLoginData.email}
@@ -67,7 +75,9 @@ function Login() {
           </label>
           <input
             type={passwordInputType}
-            className={`inp login_inp_resize ecommerce-login-inp`}
+            className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+              theme == "dark" && "modal-dark-theme note-create-inp-border"
+            }`}
             id="inp-password"
             placeholder="Enter your password"
             value={userLoginData.password}
@@ -110,7 +120,7 @@ function Login() {
 
         <div className="inp-container ml-1 mb-1">
           <button
-            className="btn cta-btn login_custom_btn"
+            className="btn login_custom_btn pri-btn-style"
             type="button"
             onClick={() => handleUserLogin()}
           >

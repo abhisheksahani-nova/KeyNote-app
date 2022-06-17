@@ -57,6 +57,10 @@
   border-radius: 0 20px 20px 0;
 }
 
+.sidebar-list-dark:hover {
+  background-color: var(--ecommerce-btn-clr);
+}
+
 .dark-theme-font-clr {
   color: var(--text-primary);
 }
