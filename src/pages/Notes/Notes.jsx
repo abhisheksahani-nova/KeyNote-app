@@ -170,6 +170,7 @@ function Notes() {
                   <ColorSelector
                     noteData={noteData}
                     setNoteData={setNoteData}
+                    setShowColorSelector={setShowColorSelector}
                   />
                 )}
 

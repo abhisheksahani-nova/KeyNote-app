@@ -40,6 +40,18 @@
   background-color: var(--note-nav-inp-dark-clr);
 }
 
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-smaller{
+  gap: 3px;
+}
+
+.flex-direction-col {
+  flex-direction: column;
+}
+
 @media screen and (max-width: 655px) {
   .nav-inputbox {
     width: 30rem;
