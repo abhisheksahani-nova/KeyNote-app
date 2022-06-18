@@ -44,12 +44,18 @@
   gap: 1rem;
 }
 
-.gap-smaller{
+.gap-smaller {
   gap: 3px;
 }
 
 .flex-direction-col {
   flex-direction: column;
+}
+
+@media screen and (max-width: 850px) {
+  .nav-inputbox {
+    width: 28rem;
+  }
 }
 
 @media screen and (max-width: 655px) {
@@ -70,13 +76,23 @@
 
 @media screen and (max-width: 500px) {
   .nav-inputbox {
-    width: 20rem;
+    width: 16rem;
+    font-size: 1rem;
+  }
+
+  .nav-heading-restyle {
+    font-size: 1.1rem;
+  }
+
+  .nav-inner-container {
+    gap: 0;
   }
 }
 
 @media screen and (max-width: 400px) {
   .nav-inputbox {
-    width: 17rem;
+    width: 14rem;
+    font-size: 0.8rem;
   }
 
   .nav-input-container {
@@ -84,12 +100,36 @@
   }
 
   .login-btn {
-    margin-right: 3px;
+    margin: 0 3px 0 8px;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .nav-heading-restyle {
+    font-size: 1rem;
+  }
+
+  .theme-icon-title {
+    font-size: 0.7rem;
   }
 }
 
 @media screen and (max-width: 340px) {
   .nav-inputbox {
-    width: 12rem;
+    width: 10rem;
+    font-size: 0.7rem;
+    padding: 0rem;
+  }
+
+  .nav-inputbox::placeholder {
+    font-size: 0.7rem;
+  }
+
+  .theme-icon-title {
+    font-size: 0.6rem;
+  }
+
+  .nav-heading-restyle {
+    font-size: 0.9rem;
   }
 }

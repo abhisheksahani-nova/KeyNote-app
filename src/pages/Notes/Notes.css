@@ -133,11 +133,11 @@
   border: 1px solid var(--note-border-dark-clr);
 }
 
-.white-clr{
+.white-clr {
   color: var(--light-clr);
 }
 
-.dark-clr{
+.dark-clr {
   color: var(--note-nav-inp-dark-clr);
 }
 
@@ -253,5 +253,11 @@
   .notes-container {
     width: 88%;
     padding: 2rem 0.5rem;
+  }
+
+  .pri-btn-style {
+    font-size: 0.68rem;
+    padding: 0.4rem 0.3rem;
+    border-radius: 4px;
   }
 }

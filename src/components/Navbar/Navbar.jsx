@@ -44,13 +44,15 @@ function Navbar() {
         />
       </div>
 
-      <div className="d-flex gap-1">
+      <div className="d-flex gap-1 nav-inner-container">
         <div className="d-flex flex-direction-col align-item-center gap-smaller">
           <i
             class={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}
             onClick={() => handleThemeChange()}
           ></i>
-          <small>{theme == "light" ? "Dark" : "Light"}</small>
+          <small className="theme-icon-title">
+            {theme == "light" ? "Dark" : "Light"}
+          </small>
         </div>
 
         <button

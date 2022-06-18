@@ -23,15 +23,9 @@
 }
 
 .add-new-label-dropdown {
-  top: 35%;
-  right: calc(100vw / 2 - 14rem / 2);
-}
-
-.select-label-dropdown {
-  top: 86%;
-  left: 24%;
-  position: absolute;
-  box-shadow: 0 0 6px var(--gray-shade5);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .playlist-li-item {
@@ -95,10 +89,6 @@
     width: 16rem;
   }
 
-  .add-new-label-dropdown {
-    right: calc(100vw / 2 - 16rem / 2);
-  }
-
   .add-label-dropdown-title {
     font-size: 1.05rem;
   }
@@ -107,10 +97,6 @@
 @media screen and (max-width: 700px) {
   .playlist-stacklist {
     width: 19rem;
-  }
-
-  .add-new-label-dropdown {
-    right: calc(100vw / 2 - 19rem / 2);
   }
 
   .select-label-dropdown {

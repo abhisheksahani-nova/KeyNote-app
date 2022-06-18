@@ -74,12 +74,11 @@ function LabelDropdown({
   }
 
   return (
-    <div className={`${isAddNewLabel && "playlist-dropdown-container"} `}>
+    <div className={`playlist-dropdown-container `}>
       <ul
-        className={`stacked-list list-style-none playlist-stacklist p-small ${
+        className={`stacked-list list-style-none playlist-stacklist add-new-label-dropdown p-small ${
           theme == "dark" && "modal-dark-theme"
-        }  ${
-          isAddNewLabel ? "add-new-label-dropdown" : "select-label-dropdown"
+        }  
         }`}
       >
         <li

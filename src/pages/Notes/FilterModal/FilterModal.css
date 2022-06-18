@@ -3,8 +3,9 @@
 }
 
 .filter-modal-position {
-  top: 10%;
-  right: 35%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .p-1 {
