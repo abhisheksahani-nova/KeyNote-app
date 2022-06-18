@@ -141,6 +141,10 @@
   color: var(--note-nav-inp-dark-clr);
 }
 
+.empty-icon-dark-clr {
+  color: var(--gray-shade3);
+}
+
 @media screen and (max-width: 655px) {
   .notes-container {
     width: 85%;

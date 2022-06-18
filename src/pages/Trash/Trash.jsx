@@ -1,10 +1,21 @@
 import React from "react";
-import { useEffect } from "react/cjs/react.production.min";
 import { Navbar, Sidebar, NoteCard } from "../../components/index";
 import { useTrash } from "../../context/trash-context";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useNotes } from "../../context/notes-context";
 
 function Trash() {
   const { trash } = useTrash();
+  const { theme } = useNotes();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function handleAddNotes() {
+    if (location.pathname == "/trash") {
+      navigate("/");
+    }
+  }
 
   return (
     <div>
@@ -21,8 +32,19 @@ function Trash() {
           ) : (
             <div className="d-flex align-item-center mt-5">
               <div className="d-flex flex-direction-col gap-1 empty-note-icon-cont">
-                <i class="fa-solid fa-file empty-note-icon"></i>
-                <button className="btn pri-outline-btn">Add notes</button>
+                <i
+                  class={`fa-solid fa-file empty-note-icon ${
+                    theme == "dark" && "empty-icon-dark-clr"
+                  }`}
+                ></i>
+                <button
+                  className={`btn pri-outline-btn ${
+                    theme == "dark" && "pri-outline-btn-dark"
+                  }`}
+                  onClick={() => handleAddNotes()}
+                >
+                  Add notes
+                </button>
               </div>
             </div>
           )}

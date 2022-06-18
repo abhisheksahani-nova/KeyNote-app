@@ -289,7 +289,9 @@ function Notes() {
 
             <button
               className={`btn pri-btn-style btn-filter-responsive-sty ${
-                windowWidth <= 500 && "pri-outline-btn"
+                windowWidth <= 500 &&
+                theme == "dark" &&
+                "pri-outline-btn pri-outline-btn-dark"
               }`}
               onClick={() => setOpenFilterModal((prev) => !prev)}
             >
@@ -349,8 +351,19 @@ function Notes() {
           ) : (
             <div className="d-flex align-item-center mt-5">
               <div className="d-flex flex-direction-col gap-1 empty-note-icon-cont">
-                <i class="fa-solid fa-file empty-note-icon"></i>
-                <button className="btn pri-outline-btn">Add notes</button>
+                <i
+                  class={`fa-solid fa-file empty-note-icon ${
+                    theme == "dark" && "empty-icon-dark-clr"
+                  }`}
+                ></i>
+                <button
+                  className={`btn pri-outline-btn ${
+                    theme == "dark" && "pri-outline-btn-dark"
+                  }`}
+                  onClick={() => setOpenCreateNote((prev) => !prev)}
+                >
+                  Add notes
+                </button>
               </div>
             </div>
           )}
