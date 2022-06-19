@@ -1,48 +1,48 @@
 .color-selector-container {
   position: absolute;
-  width: 12rem;
-  height: 3rem;
+  width: 13rem;
+  height: 3.2rem;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
   box-shadow: 0 0 6px var(--gray-shade5);
   border: 1px solid var(--gray-shade5);
   z-index: 10;
-  bottom: 1.6rem;
-  left: 17.3rem;
   border-radius: 6px;
+  background-color: var(--secondary-clr);
 }
 
 .color-selector-container div:nth-child(1) {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: var(--notecard-bg-blue);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(2) {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: var(--notecard-bg-brown);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(3) {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: var(--notecard-bg-pink);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(4) {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: var(--notecard-bg-green);
   border-radius: 50%;
 }
 
 .color-selector-container div:nth-child(5) {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: var(--notecard-bg-yellow);
   border-radius: 50%;
 }

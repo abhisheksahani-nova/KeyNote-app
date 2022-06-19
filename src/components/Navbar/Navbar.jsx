@@ -11,7 +11,7 @@ function Navbar() {
   function handleAuth() {
     if (token) {
       localStorage.clear();
-      navigate("/");
+      window.location.href = "/";
     } else {
       navigate("/login");
     }
