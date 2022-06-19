@@ -24,7 +24,7 @@ function Navbar() {
   return (
     <nav className="nav-bar white mb-0 nav-border-bottom">
       <div className={`nav-innerContainer ${theme == "light" && "font-clr"}`}>
-        <h2 className="nav-heading mr-4 nav-heading-restyle">KeyNote</h2>
+        <h2 className="nav-heading ml-1 mr-3 nav-heading-restyle">KeyNote</h2>
       </div>
 
       <div className="nav-innerContainer font-clr width-auto nav-input-container">
