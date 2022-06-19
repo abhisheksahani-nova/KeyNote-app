@@ -38,7 +38,7 @@
   border: none;
   border-bottom: 1px solid var(--gray-shade5);
   outline: none;
-  width: 90%;
+  width: 100%;
 }
 
 .cursor-p {
