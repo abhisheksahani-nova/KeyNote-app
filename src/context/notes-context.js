@@ -1,12 +1,14 @@
 import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const NotesContext = createContext();
 
 const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -72,6 +74,35 @@ const NotesProvider = ({ children }) => {
     }
   };
 
+  const loginUser = async (userLoginData) => {
+    try {
+      const response = await axios.post("/api/auth/login", userLoginData);
+      localStorage.setItem("token", response.data.encodedToken);
+      localStorage.setItem("email", userLoginData.email);
+      toast("Successfully login", { type: "success" });
+      navigate("/");
+    } catch (error) {
+      toast("Fail to login", { type: "error" });
+    }
+  };
+
+  const guestLogin = async () => {
+    const userLoginData = {
+      email: "abhisheksahani@gmail.com",
+      password: "abhisheksahani123",
+    };
+
+    try {
+      const response = await axios.post("/api/auth/login", userLoginData);
+      localStorage.setItem("token", response.data.encodedToken);
+      localStorage.setItem("email", userLoginData.email);
+      toast("Successfully login", { type: "success" });
+      navigate("/");
+    } catch (error) {
+      toast("Fail to login", { type: "error" });
+    }
+  };
+
   return (
     <NotesContext.Provider
       value={{
@@ -81,6 +112,8 @@ const NotesProvider = ({ children }) => {
         addNewNote,
         updateNote,
         deleteNote,
+        loginUser,
+        guestLogin,
         theme,
         setTheme,
       }}
