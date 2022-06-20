@@ -12,6 +12,11 @@
   background-color: var(--secondary-clr);
 }
 
+.color-selector-container-dark {
+  background-color: var(--ecommerce-btn-clr);
+  box-shadow: 0 0;
+}
+
 .color-selector-container div:nth-child(1) {
   width: 1.8rem;
   height: 1.8rem;
