@@ -86,9 +86,9 @@ function NoteCard({
         </div>
         <div
           className={`d-flex note-footer ${
-            location.pathname == "/archives"
-              ? "archivenote-icons-container"
-              : "note-icons-container"
+            location.pathname == "/"
+              ? "note-icons-container"
+              : "archivenote-icons-container"
           } `}
         >
           {location.pathname == "/" && (
