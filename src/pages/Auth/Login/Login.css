@@ -48,6 +48,10 @@
   font-size: 0.9rem;
 }
 
+.outline-none{
+  outline: none;
+}
+
 @media screen and (max-width: 500px) {
   .ecommerce-login-inp::placeholder {
     font-size: 0.95rem;

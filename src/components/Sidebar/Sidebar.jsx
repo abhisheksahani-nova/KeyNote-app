@@ -2,10 +2,12 @@ import React from "react";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNotes } from "../../context/notes-context";
 
 function Sidebar() {
-  const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState();
+  const { theme } = useNotes();
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleResize() {
@@ -23,31 +25,45 @@ function Sidebar() {
     <div className="videolib-drawer-container">
       <ul className="videolib-list">
         <li
-          className="videolib-list-item sidebar-list"
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
           onClick={() => navigate("/")}
         >
           <i className="fa-solid fa-lightbulb videolib-drawer-icon"></i>
           {windowWidth > 655 && "Notes"}
         </li>
-        <li className="videolib-list-item sidebar-list">
+        <li
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
+        >
           <i className="fa-solid fa-tag videolib-drawer-icon"></i>{" "}
           {windowWidth > 655 && "Labels"}
         </li>
         <li
-          className="videolib-list-item sidebar-list"
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
           onClick={() => navigate("/archives")}
         >
           <i className="fa-solid fa-box-archive videolib-drawer-icon"></i>{" "}
           {windowWidth > 655 && "Archive"}
         </li>
         <li
-          className="videolib-list-item sidebar-list"
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
           onClick={() => navigate("/trash")}
         >
           <i className="fa-solid fa-trash-can videolib-drawer-icon"></i>{" "}
           {windowWidth > 655 && "Trash"}
         </li>
-        <li className="videolib-list-item sidebar-list">
+        <li
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
+        >
           <i className="fa-solid fa-pencil videolib-drawer-icon"></i>
           {windowWidth > 655 && "Edit labels"}
         </li>

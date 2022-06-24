@@ -23,15 +23,9 @@
 }
 
 .add-new-label-dropdown {
-  top: 35%;
-  right: calc(100vw / 2 - 14rem / 2);
-}
-
-.select-label-dropdown {
-  top: 86%;
-  left: 24%;
-  position: absolute;
-  box-shadow: 0 0 6px var(--gray-shade5);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .playlist-li-item {
@@ -59,7 +53,7 @@
 }
 
 .playlist-create-btn-resize {
-  padding: 0.3rem 0.7rem;
+  padding: 0.33rem 0.7rem;
 }
 
 .playlist-add-icon {
@@ -74,6 +68,10 @@
   align-items: center;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
 .select-label-fontsize {
   font-size: 0.8rem;
 }
@@ -82,17 +80,13 @@
   word-break: break-word;
 }
 
-.icon-small{
+.icon-small {
   font-size: 0.9rem;
 }
 
 @media screen and (max-width: 1100px) {
   .playlist-stacklist {
     width: 16rem;
-  }
-
-  .add-new-label-dropdown {
-    right: calc(100vw / 2 - 16rem / 2);
   }
 
   .add-label-dropdown-title {
@@ -103,10 +97,6 @@
 @media screen and (max-width: 700px) {
   .playlist-stacklist {
     width: 19rem;
-  }
-
-  .add-new-label-dropdown {
-    right: calc(100vw / 2 - 19rem / 2);
   }
 
   .select-label-dropdown {

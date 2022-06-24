@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNotes } from "../../../context/notes-context";
 
 function Signup() {
   const [userSignupData, setUserSignupData] = useState({
@@ -17,6 +18,7 @@ function Signup() {
     useState("password");
 
   const navigate = useNavigate();
+  const { theme } = useNotes();
 
   function handleSignup() {
     setCheckSignup(true);
@@ -50,7 +52,11 @@ function Signup() {
   return (
     <>
       <section className="login_form_container d-flex">
-        <div className="card-basic login_form app">
+        <div
+          className={`card-basic login_form ${
+            theme == "dark" && "modal-dark-theme"
+          }`}
+        >
           <h2 className="t-align-center mt-2 mb-2">Signup</h2>
 
           <div className="inp-container mb-1">
@@ -58,7 +64,9 @@ function Signup() {
               First name
             </label>
             <input
-              className={`inp login_inp_resize ecommerce-login-inp `}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "modal-dark-theme note-create-inp-border"
+              }`}
               id="inp-email"
               placeholder="Enter your first name"
               value={userSignupData.firstName}
@@ -86,7 +94,9 @@ function Signup() {
               Last name
             </label>
             <input
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "modal-dark-theme note-create-inp-border"
+              }`}
               id="inp-email"
               placeholder="Enter your last name"
               value={userSignupData.lastName}
@@ -114,7 +124,9 @@ function Signup() {
               Email address
             </label>
             <input
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "modal-dark-theme note-create-inp-border"
+              }`}
               id="inp-email"
               placeholder="Enter your email address"
               value={userSignupData.email}
@@ -140,7 +152,9 @@ function Signup() {
             </label>
             <input
               type={passwordInputType}
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "modal-dark-theme note-create-inp-border"
+              }`}
               id="inp-password"
               placeholder="Enter password"
               value={userSignupData.password}
@@ -181,7 +195,9 @@ function Signup() {
             </label>
             <input
               type={confirmPasswordInputType}
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "modal-dark-theme note-create-inp-border"
+              }`}
               id="inp-email"
               placeholder="Enter your password again"
               value={userSignupData.confirmPassword}
@@ -226,7 +242,7 @@ function Signup() {
 
           <div className="inp-container ml-1 mb-1">
             <button
-              className="btn cta-btn login_custom_btn"
+              className="btn login_custom_btn pri-btn-style"
               type="button"
               onClick={() => handleSignup()}
             >

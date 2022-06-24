@@ -17,7 +17,7 @@ function LabelDropdown({
   const [isUpdateChecked, setIsUpdateChecked] = useState(true);
   const token = localStorage.getItem("token");
   const { labels, setLabels } = useLabels();
-  const { notes } = useNotes();
+  const { notes, theme } = useNotes();
   const [checkedState, setCheckedState] = useState(
     new Array(labels.length).fill(false)
   );
@@ -74,10 +74,11 @@ function LabelDropdown({
   }
 
   return (
-    <div className={`${isAddNewLabel && "playlist-dropdown-container"}`}>
+    <div className={`playlist-dropdown-container `}>
       <ul
-        className={`stacked-list list-style-none playlist-stacklist p-small ${
-          isAddNewLabel ? "add-new-label-dropdown" : "select-label-dropdown"
+        className={`stacked-list list-style-none playlist-stacklist add-new-label-dropdown p-small ${
+          theme == "dark" && "modal-dark-theme"
+        }  
         }`}
       >
         <li
@@ -103,7 +104,9 @@ function LabelDropdown({
             <input
               type="text"
               placeholder="Create new label"
-              className="playlist-dropdown-inp"
+              className={`playlist-dropdown-inp ${
+                theme == "dark" && "modal-dark-theme"
+              }`}
               value={label}
               onChange={(e) => setLabel(e.target.value)}
             />
@@ -146,7 +149,7 @@ function LabelDropdown({
         {isAddNewLabel && (
           <li className="d-flex li-item playlist-li-item j-content-right border-none">
             <button
-              className="btn pri-cta-bg-clr playlist-create-btn-resize"
+              className="btn pri-cta-bg-clr playlist-create-btn-resize pri-btn-bg"
               onClick={() => handleAddNewLabel()}
             >
               Add

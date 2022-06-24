@@ -35,7 +35,7 @@ function Notes() {
     noteColor: "",
   });
 
-  const { notes, addNewNote, updateNote } = useNotes();
+  const { notes, addNewNote, updateNote, theme } = useNotes();
   const { filterState, filterDispatch } = useFilter();
   const token = localStorage.getItem("token");
 
@@ -141,14 +141,20 @@ function Notes() {
         <div className="notes-container">
           <div className="d-flex align-items-start mb-2 p-relative">
             {openCreateNote ? (
-              <div className="create-note-container">
+              <div
+                className={`create-note-container ${
+                  theme == "dark" && "note-create-inp-border"
+                }`}
+              >
                 <div className="d-flex title-inp-container mb-2">
                   <input
                     onChange={(e) =>
                       setNoteData({ ...noteData, title: e.target.value })
                     }
                     value={noteData.title}
-                    className="note-title-inp"
+                    className={`note-title-inp ${
+                      theme == "dark" && "create-note-inp-dark-clr"
+                    }`}
                     type="text"
                     placeholder="Title"
                   />
@@ -164,6 +170,7 @@ function Notes() {
                   <ColorSelector
                     noteData={noteData}
                     setNoteData={setNoteData}
+                    setShowColorSelector={setShowColorSelector}
                   />
                 )}
 
@@ -180,7 +187,9 @@ function Notes() {
                 )}
 
                 <TextareaAutosize
-                  className="create-note-textarea"
+                  className={`create-note-textarea ${
+                    theme == "dark" && "create-note-inp-dark-clr"
+                  }`}
                   placeholder="Take a note..."
                   onChange={(e) =>
                     setNoteData({ ...noteData, note: e.target.value })
@@ -193,7 +202,10 @@ function Notes() {
                     <select
                       onChange={(e) => handlePriorityData(e)}
                       value={noteData.priority}
-                      className="note-priority-dropdown"
+                      className={`note-priority-dropdown ${
+                        theme == "dark" &&
+                        "nav-inp-dark-clr note-create-inp-border white-clr"
+                      }`}
                     >
                       <optgroup className="select-option-sty">
                         <option value="low">low</option>
@@ -209,12 +221,12 @@ function Notes() {
                     ></i>
 
                     <i
-                      class="fa-solid fa-palette"
+                      className="fa-solid fa-palette"
                       onClick={() => setShowColorSelector((prev) => !prev)}
                     ></i>
 
                     <i
-                      class="fa-solid fa-face-smile"
+                      className="fa-solid fa-face-smile"
                       onClick={() => setShowEmojiPicker((prev) => !prev)}
                     ></i>
 
@@ -228,7 +240,9 @@ function Notes() {
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
                       onClick={() => setOpenCreateNote((prev) => !prev)}
-                      className="btn btn-outline btn-small-size pri-outline-btn"
+                      className={`btn btn-outline btn-small-size pri-outline-btn ${
+                        theme == "dark" && "pri-outline-btn-dark"
+                      }`}
                     >
                       Close
                     </button>
@@ -244,7 +258,10 @@ function Notes() {
             ) : (
               <input
                 onClick={() => setOpenCreateNote((prev) => !prev)}
-                className="nav_searchBar add-note-inp"
+                className={`nav_searchBar add-note-inp ${
+                  theme == "dark" &&
+                  "create-note-inp-dark-clr note-create-inp-border"
+                }`}
                 type="text"
                 placeholder="Take a note..."
               />
@@ -252,14 +269,18 @@ function Notes() {
 
             {windowWidth < 655 ? (
               <button
-                className="btn pri-btn-style pri-outline-btn mr-1 btn-label-responsive-sty"
+                className={`btn pri-btn-style pri-outline-btn mr-1 btn-label-responsive-sty ${
+                  theme == "dark" && "pri-outline-btn-dark"
+                }`}
                 onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
               >
                 <i class="fa-solid fa-list-check notes-btn-icon-resize"></i>
               </button>
             ) : (
               <button
-                className="btn pri-btn-style pri-outline-btn mr-1"
+                className={`btn pri-btn-style pri-outline-btn mr-1 ${
+                  theme == "dark" && "pri-outline-btn-dark"
+                } `}
                 onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
               >
                 Add label
@@ -268,7 +289,9 @@ function Notes() {
 
             <button
               className={`btn pri-btn-style btn-filter-responsive-sty ${
-                windowWidth <= 500 && "pri-outline-btn"
+                windowWidth <= 500 &&
+                theme == "dark" &&
+                "pri-outline-btn pri-outline-btn-dark"
               }`}
               onClick={() => setOpenFilterModal((prev) => !prev)}
             >
@@ -280,46 +303,70 @@ function Notes() {
             </button>
           </div>
 
-          <div>
+          {allPinnedNotes?.length > 0 || allOtherNotes?.length > 0 ? (
             <div>
-              <small className="font-size-small ml-1 f-weight-500">
-                PINNED
-              </small>
-              <div className="d-flex notecard-container">
-                {allPinnedNotes?.map((pinnedNote) => {
-                  return (
-                    <NoteCard
-                      key={pinnedNote._id}
-                      noteInfo={pinnedNote}
-                      setNoteData={setNoteData}
-                      setNoteId={setNoteId}
-                      setIsUpdateNote={setIsUpdateNote}
-                      setOpenCreateNote={setOpenCreateNote}
-                    />
-                  );
-                })}
+              {allPinnedNotes?.length > 0 && (
+                <div>
+                  <small className="font-size-small ml-1 f-weight-500">
+                    PINNED
+                  </small>
+                  <div className="d-flex notecard-container">
+                    {allPinnedNotes?.map((pinnedNote) => {
+                      return (
+                        <NoteCard
+                          key={pinnedNote._id}
+                          noteInfo={pinnedNote}
+                          setNoteData={setNoteData}
+                          setNoteId={setNoteId}
+                          setIsUpdateNote={setIsUpdateNote}
+                          setOpenCreateNote={setOpenCreateNote}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              {allOtherNotes?.length > 0 && (
+                <div>
+                  <small className="font-size-small ml-1 f-weight-500">
+                    OTHERS
+                  </small>
+                  <div className="d-flex notecard-container">
+                    {allOtherNotes.map((otherNote) => {
+                      return (
+                        <NoteCard
+                          key={otherNote._id}
+                          noteInfo={otherNote}
+                          setNoteData={setNoteData}
+                          setNoteId={setNoteId}
+                          setIsUpdateNote={setIsUpdateNote}
+                          setOpenCreateNote={setOpenCreateNote}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="d-flex align-item-center mt-5">
+              <div className="d-flex flex-direction-col gap-1 empty-note-icon-cont">
+                <i
+                  class={`fa-solid fa-file empty-note-icon ${
+                    theme == "dark" && "empty-icon-dark-clr"
+                  }`}
+                ></i>
+                <button
+                  className={`btn pri-outline-btn ${
+                    theme == "dark" && "pri-outline-btn-dark"
+                  }`}
+                  onClick={() => setOpenCreateNote((prev) => !prev)}
+                >
+                  Add notes
+                </button>
               </div>
             </div>
-            <div>
-              <small className="font-size-small ml-1 f-weight-500">
-                OTHERS
-              </small>
-              <div className="d-flex notecard-container">
-                {allOtherNotes.map((otherNote) => {
-                  return (
-                    <NoteCard
-                      key={otherNote._id}
-                      noteInfo={otherNote}
-                      setNoteData={setNoteData}
-                      setNoteId={setNoteId}
-                      setIsUpdateNote={setIsUpdateNote}
-                      setOpenCreateNote={setOpenCreateNote}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
     </div>
