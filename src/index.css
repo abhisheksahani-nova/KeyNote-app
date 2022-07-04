@@ -11,6 +11,7 @@
   --note-border-dark-clr: #555555;
   --background: var(--light-bg-clr);
   --text-primary: var(--font-clr);
+  --dark-purple-clr: #4c3a51;
 }
 
 [data-theme="dark"] {

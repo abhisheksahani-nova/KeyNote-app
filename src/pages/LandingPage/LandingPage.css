@@ -13,7 +13,7 @@
 
 .file-icon {
   font-size: 13rem;
-  color: #4C3A51;
+  color: var(--dark-purple-clr);
 }
 
 .gap-2 {
