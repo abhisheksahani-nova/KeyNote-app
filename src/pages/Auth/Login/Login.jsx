@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { NavLink } from "react-router-dom";
 import "./Login.css";
-import { toast } from "react-toastify";
 import { useNotes } from "../../../context/notes-context";
 
 function Login() {
@@ -13,24 +11,13 @@ function Login() {
   const [checkLogin, setCheckLogin] = useState(false);
   const [passwordInputType, setPasswordInputType] = useState("password");
 
-  const navigate = useNavigate();
-  const { theme } = useNotes();
+  const { theme, loginUser, guestLogin } = useNotes();
 
   function handleUserLogin() {
     setCheckLogin(true);
 
     if (userLoginData.email && userLoginData.password) {
-      (async () => {
-        try {
-          const response = await axios.post("/api/auth/login", userLoginData);
-          localStorage.setItem("token", response.data.encodedToken);
-          localStorage.setItem("email", userLoginData.email);
-          toast("Successfully login", { type: "success" });
-          navigate("/");
-        } catch (error) {
-          toast("Fail to login", { type: "error" });
-        }
-      })();
+      loginUser(userLoginData);
     }
   }
 
@@ -119,6 +106,16 @@ function Login() {
         </div>
 
         <div className="inp-container ml-1 mb-1">
+          <button
+            className={`btn pri-outline-btn guest-login-btn mb-1 ${
+              theme == "dark" && "modal-dark-theme"
+            }`}
+            type="button"
+            onClick={() => guestLogin()}
+          >
+            Guest login
+          </button>
+
           <button
             className="btn login_custom_btn pri-btn-style"
             type="button"

@@ -13,6 +13,7 @@ import { formatDate } from "../../backend/utils/authUtils";
 import { useFilter, applyFilters } from "../../reducer/filterReducer";
 import ColorSelector from "./ColorSelector/ColorSelector";
 import Picker from "emoji-picker-react";
+import { useNavigate } from "react-router-dom";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
@@ -38,6 +39,7 @@ function Notes() {
   const { notes, addNewNote, updateNote, theme } = useNotes();
   const { filterState, filterDispatch } = useFilter();
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const [windowWidth, setWindowWidth] = useState();
 
@@ -139,10 +141,10 @@ function Notes() {
         )}
 
         <div className="notes-container">
-          <div className="d-flex align-items-start mb-2 p-relative">
+          <div className="d-flex align-items-start mb-2">
             {openCreateNote ? (
               <div
-                className={`create-note-container ${
+                className={`create-note-container p-relative ${
                   theme == "dark" && "note-create-inp-border"
                 }`}
               >
@@ -248,7 +250,11 @@ function Notes() {
                     </button>
                     <button
                       className="btn pri-btn-style btn-small-size"
-                      onClick={() => handleSaveNote(token, noteData, noteId)}
+                      onClick={() =>
+                        token
+                          ? handleSaveNote(token, noteData, noteId)
+                          : navigate("/login")
+                      }
                     >
                       Save
                     </button>
@@ -272,7 +278,11 @@ function Notes() {
                 className={`btn pri-btn-style pri-outline-btn mr-1 btn-label-responsive-sty ${
                   theme == "dark" && "pri-outline-btn-dark"
                 }`}
-                onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+                onClick={() =>
+                  token
+                    ? setIsLabelDropdownOpen((prev) => !prev)
+                    : navigate("/login")
+                }
               >
                 <i class="fa-solid fa-list-check notes-btn-icon-resize"></i>
               </button>
@@ -281,7 +291,11 @@ function Notes() {
                 className={`btn pri-btn-style pri-outline-btn mr-1 ${
                   theme == "dark" && "pri-outline-btn-dark"
                 } `}
-                onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
+                onClick={() =>
+                  token
+                    ? setIsLabelDropdownOpen((prev) => !prev)
+                    : navigate("/login")
+                }
               >
                 Add label
               </button>
@@ -293,7 +307,9 @@ function Notes() {
                 theme == "dark" &&
                 "pri-outline-btn pri-outline-btn-dark"
               }`}
-              onClick={() => setOpenFilterModal((prev) => !prev)}
+              onClick={() =>
+                token ? setOpenFilterModal((prev) => !prev) : navigate("/login")
+              }
             >
               {windowWidth > 500 ? (
                 "Filter"

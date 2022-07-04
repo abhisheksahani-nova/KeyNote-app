@@ -48,12 +48,23 @@
   font-size: 0.9rem;
 }
 
-.outline-none{
+.outline-none {
   outline: none;
+}
+
+.guest-login-btn {
+  width: 90%;
+  padding: 0.6rem;
 }
 
 @media screen and (max-width: 500px) {
   .ecommerce-login-inp::placeholder {
     font-size: 0.95rem;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .login_custom_btn {
+    width: 90%;
   }
 }
