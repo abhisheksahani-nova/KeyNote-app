@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Notes, Login, Signup, Archives, Trash } from "./pages/index";
+import {
+  Notes,
+  Login,
+  Signup,
+  Archives,
+  Trash,
+  LandingPage,
+} from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
@@ -21,6 +28,7 @@ function App() {
     <div className="app" data-theme={theme}>
       <Routes>
         <Route path="/" element={<Notes />}></Route>
+        <Route path="/landing" element={<LandingPage />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/archives" element={<Archives />}></Route>
