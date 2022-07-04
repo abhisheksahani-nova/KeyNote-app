@@ -7,7 +7,7 @@ import {
   Trash,
   LandingPage,
 } from "./pages/index";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import Mockman from "mockman-js";
@@ -15,6 +15,7 @@ import { useNotes } from "./context/notes-context";
 
 function App() {
   const { theme } = useNotes();
+  const navigate = useNavigate();
 
   if (typeof window !== "undefined") {
     injectStyle();
@@ -22,6 +23,7 @@ function App() {
 
   useEffect(() => {
     localStorage.clear();
+    navigate("/");
   }, []);
 
   return (
