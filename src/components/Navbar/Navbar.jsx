@@ -46,7 +46,9 @@ function Navbar({ isLanding }) {
         </div>
       )}
 
-      <div className={`d-flex gap-1 nav-inner-container ${isLanding && "mr-3"}`}>
+      <div
+        className={`d-flex gap-1 nav-inner-container ${isLanding && "mr-3"}`}
+      >
         <div className="d-flex flex-direction-col align-item-center gap-smaller">
           <i
             class={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}

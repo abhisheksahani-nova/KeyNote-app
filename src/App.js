@@ -27,8 +27,8 @@ function App() {
   return (
     <div className="app" data-theme={theme}>
       <Routes>
-        <Route path="/" element={<Notes />}></Route>
-        <Route path="/landing" element={<LandingPage />}></Route>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/home" element={<Notes />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/archives" element={<Archives />}></Route>

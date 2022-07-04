@@ -1,8 +1,11 @@
 import React from "react";
 import { Navbar } from "../../components/index";
 import "./LandingPage.css";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Navbar isLanding={true} />
@@ -16,7 +19,10 @@ function LandingPage() {
               way with <span className="orange-text-clr">KeyNote</span> & make
               your neurons dataless.
             </h1>
-            <button className="btn pri-outline-btn width-max-content">
+            <button
+              className="btn pri-outline-btn width-max-content"
+              onClick={() => navigate("/login")}
+            >
               Join Now!
             </button>
           </div>
