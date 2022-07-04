@@ -80,7 +80,7 @@ const NotesProvider = ({ children }) => {
       localStorage.setItem("token", response.data.encodedToken);
       localStorage.setItem("email", userLoginData.email);
       toast("Successfully login", { type: "success" });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       toast("Fail to login", { type: "error" });
     }
@@ -97,7 +97,7 @@ const NotesProvider = ({ children }) => {
       localStorage.setItem("token", response.data.encodedToken);
       localStorage.setItem("email", userLoginData.email);
       toast("Successfully login", { type: "success" });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       toast("Fail to login", { type: "error" });
     }

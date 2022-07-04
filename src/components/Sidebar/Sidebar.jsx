@@ -29,7 +29,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
         >
           <i className="fa-solid fa-lightbulb videolib-drawer-icon"></i>
           {windowWidth > 655 && "Notes"}

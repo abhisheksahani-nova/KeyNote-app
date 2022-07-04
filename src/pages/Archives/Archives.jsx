@@ -14,7 +14,7 @@ function Archives() {
 
   function handleAddNotes() {
     if (location.pathname == "/archives") {
-      navigate("/");
+      navigate("/home");
     }
   }
 

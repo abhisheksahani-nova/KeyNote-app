@@ -41,7 +41,7 @@ function Signup() {
           );
           localStorage.setItem("email", userSignupData.email);
           toast("Successfully signup", { type: "success" });
-          navigate("/");
+          navigate("/home");
         } catch (error) {
           toast("Fail to signup", { type: "error" });
         }
