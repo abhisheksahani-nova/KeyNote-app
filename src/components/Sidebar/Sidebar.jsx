@@ -8,6 +8,7 @@ function Sidebar() {
   const [windowWidth, setWindowWidth] = useState();
   const { theme } = useNotes();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     function handleResize() {
@@ -45,7 +46,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
-          onClick={() => navigate("/archives")}
+          onClick={() => navigate(token ? "/archives" : "/login")}
         >
           <i className="fa-solid fa-box-archive videolib-drawer-icon"></i>{" "}
           {windowWidth > 655 && "Archive"}
@@ -54,7 +55,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
-          onClick={() => navigate("/trash")}
+          onClick={() => navigate(token ? "/trash" : "/login")}
         >
           <i className="fa-solid fa-trash-can videolib-drawer-icon"></i>{" "}
           {windowWidth > 655 && "Trash"}

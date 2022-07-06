@@ -48,19 +48,29 @@
   gap: 3px;
 }
 
+.mr-3 {
+  margin-right: 3rem;
+}
+
 .flex-direction-col {
   flex-direction: column;
 }
 
 @media screen and (max-width: 850px) {
   .nav-inputbox {
-    width: 28rem;
+    width: 26rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .nav-inputbox {
+    width: 22rem;
   }
 }
 
 @media screen and (max-width: 655px) {
   .nav-inputbox {
-    width: 30rem;
+    width: 25rem;
   }
 
   .nav-heading-restyle {
@@ -70,13 +80,13 @@
 
 @media screen and (max-width: 575px) {
   .nav-inputbox {
-    width: 23rem;
+    width: 20rem;
   }
 }
 
 @media screen and (max-width: 500px) {
   .nav-inputbox {
-    width: 16rem;
+    width: 13rem;
     font-size: 1rem;
   }
 
@@ -91,7 +101,7 @@
 
 @media screen and (max-width: 400px) {
   .nav-inputbox {
-    width: 14rem;
+    width: 12rem;
     font-size: 0.8rem;
   }
 
