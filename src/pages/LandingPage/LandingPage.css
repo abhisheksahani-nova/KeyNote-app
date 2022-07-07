@@ -1,0 +1,33 @@
+.landingpage-main-container {
+  height: 80vh;
+}
+
+.landingpage-content-container {
+  width: 50%;
+  gap: 5rem;
+}
+
+.landingpage-content {
+  letter-spacing: 1px;
+}
+
+.file-icon {
+  font-size: 13rem;
+  color: var(--dark-purple-clr);
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.width-max-content {
+  width: max-content;
+}
+
+.orange-text-clr {
+  color: var(--dark-primary-clr);
+}
+
+.blue-text-clr {
+  color: var(--info-sec-clr);
+}

@@ -36,6 +36,10 @@
   margin-right: 2rem;
 }
 
+.mr-3 {
+  margin-right: 3rem;
+}
+
 .nav-inp-dark-clr {
   background-color: var(--note-nav-inp-dark-clr);
 }
