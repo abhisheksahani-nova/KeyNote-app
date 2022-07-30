@@ -86,26 +86,26 @@ function NoteCard({
         </div>
         <div
           className={`d-flex note-footer ${
-            location.pathname == "/"
+            location.pathname == "/home"
               ? "note-icons-container"
               : "archivenote-icons-container"
           } `}
         >
-          {location.pathname == "/" && (
+          {location.pathname == "/home" && (
             <i
               className="fa-solid fa-pencil"
               onClick={() => handleUpdateNote(_id)}
             ></i>
           )}
 
-          {location.pathname == "/" && (
+          {location.pathname == "/home" && (
             <i
               className="fa-solid fa-box-archive"
               onClick={() => addNoteToArchives(token, noteInfo, _id)}
             ></i>
           )}
 
-          {location.pathname !== "/" && (
+          {location.pathname !== "/home" && (
             <i
               className="fa-solid fa-window-restore"
               onClick={() =>
@@ -121,7 +121,7 @@ function NoteCard({
             onClick={() =>
               location.pathname == "/archives"
                 ? deleteNoteFromArchives(token, _id)
-                : location.pathname == "/"
+                : location.pathname == "/home"
                 ? handleAddNoteToTrash(noteInfo, _id, token)
                 : deleteNoteFromTrash(_id)
             }
