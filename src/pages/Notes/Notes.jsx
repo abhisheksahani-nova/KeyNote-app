@@ -15,6 +15,7 @@ import ColorSelector from "./ColorSelector/ColorSelector";
 import Picker from "emoji-picker-react";
 import { useNavigate } from "react-router-dom";
 import { useLabels } from "../../context/labels-context";
+import { toast } from "react-toastify";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
@@ -72,21 +73,35 @@ function Notes() {
     if (isUpdateNote) {
       updateNote(token, noteData, noteId);
       setIsUpdateNote((prev) => !prev);
+      setOpenCreateNote((prev) => !prev);
+      setNoteData({
+        title: "",
+        note: "",
+        priority: "low",
+        priorityRank: 1,
+        isPinned: false,
+        tags: [],
+        createdAt: formatDate(),
+        noteColor: "",
+      });
     } else {
-      addNewNote(token, noteData);
+      if (noteData.title) {
+        addNewNote(token, noteData);
+        setOpenCreateNote((prev) => !prev);
+        setNoteData({
+          title: "",
+          note: "",
+          priority: "low",
+          priorityRank: 1,
+          isPinned: false,
+          tags: [],
+          createdAt: formatDate(),
+          noteColor: "",
+        });
+      } else {
+        toast("Add title to note", { type: "message" });
+      }
     }
-
-    setOpenCreateNote((prev) => !prev);
-    setNoteData({
-      title: "",
-      note: "",
-      priority: "low",
-      priorityRank: 1,
-      isPinned: false,
-      tags: [],
-      createdAt: formatDate(),
-      noteColor: "",
-    });
   }
 
   function handlePriorityData(e) {

@@ -46,10 +46,16 @@ function LabelDropdown({
   }
 
   function handleAddNewLabel() {
-    if (label) {
+    const isLabel = labels.includes(label);
+
+    if (label && !isLabel) {
       setLabels([...labels, label]);
       setLabel("");
       toast("Label added", { type: "success" });
+    } else if (label && isLabel) {
+      toast("Label already exist", { type: "error" });
+    } else {
+      toast("Label is empty", { type: "error" });
     }
   }
 
@@ -114,10 +120,10 @@ function LabelDropdown({
         )}
 
         {isAddNewLabel
-          ? labels?.map((label) => {
+          ? labels?.map((label, index) => {
               return (
                 <li
-                  key={label}
+                  key={index}
                   className="d-flex li-item playlist-li-item cursor-p j-space-between"
                 >
                   <h5 className="ml-1 break-word">{label}</h5>
@@ -131,7 +137,7 @@ function LabelDropdown({
           : labels?.map((label, index) => {
               return (
                 <li
-                  key={label}
+                  key={index}
                   className="d-flex li-item playlist-li-item cursor-p align-item-center"
                 >
                   <input
