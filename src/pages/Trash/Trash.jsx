@@ -1,10 +1,17 @@
-import React from "react";
-import { Navbar, Sidebar, NoteCard } from "../../components/index";
+import React, { useState } from "react";
+import {
+  Navbar,
+  Sidebar,
+  NoteCard,
+  LabelDropdown,
+} from "../../components/index";
 import { useTrash } from "../../context/trash-context";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useNotes } from "../../context/notes-context";
 
 function Trash() {
+  const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+
   const { trash } = useTrash();
   const { theme } = useNotes();
 
@@ -21,7 +28,15 @@ function Trash() {
     <div>
       <Navbar />
       <section className="d-flex">
-        <Sidebar />
+        <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+
+        {isLabelDropdownOpen && (
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            isAddNewLabel={true}
+          />
+        )}
+
         <div className="notes-container">
           {trash?.length > 0 ? (
             <div className="d-flex notecard-container">

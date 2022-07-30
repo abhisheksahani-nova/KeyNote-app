@@ -123,7 +123,7 @@ function Notes() {
     <div>
       <Navbar />
       <section className="d-flex">
-        <Sidebar />
+        <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
         {isLabelDropdownOpen && (
           <LabelDropdown
             setIsLabelDropdownOpen={setIsLabelDropdownOpen}
