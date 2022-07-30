@@ -57,6 +57,10 @@
   padding: 0.6rem;
 }
 
+.outline-dark-theme-clr {
+  color: var(--note-pri-clr);
+}
+
 @media screen and (max-width: 500px) {
   .ecommerce-login-inp::placeholder {
     font-size: 0.95rem;

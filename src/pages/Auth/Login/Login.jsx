@@ -108,7 +108,7 @@ function Login() {
         <div className="inp-container ml-1 mb-1">
           <button
             className={`btn pri-outline-btn guest-login-btn mb-1 ${
-              theme == "dark" && "modal-dark-theme"
+              theme == "dark" && "modal-dark-theme outline-dark-theme-clr"
             }`}
             type="button"
             onClick={() => guestLogin()}
