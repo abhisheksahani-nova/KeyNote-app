@@ -14,6 +14,7 @@ import { useFilter, applyFilters } from "../../reducer/filterReducer";
 import ColorSelector from "./ColorSelector/ColorSelector";
 import Picker from "emoji-picker-react";
 import { useNavigate } from "react-router-dom";
+import { useLabels } from "../../context/labels-context";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
@@ -38,6 +39,8 @@ function Notes() {
 
   const { notes, addNewNote, updateNote, theme } = useNotes();
   const { filterState, filterDispatch } = useFilter();
+  const { labels } = useLabels();
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -176,17 +179,28 @@ function Notes() {
                   />
                 )}
 
-                {isSelectLabelDropdownOpen && (
-                  <LabelDropdown
-                    setIsLabelDropdownOpen={setIsLabelDropdownOpen}
-                    setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
-                    isAddNewLabel={false}
-                    noteData={noteData}
-                    setNoteData={setNoteData}
-                    noteId={noteId}
-                    isUpdateNote={isUpdateNote}
-                  />
-                )}
+                {isSelectLabelDropdownOpen &&
+                  (labels.length > 0 ? (
+                    <LabelDropdown
+                      setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+                      setIsSelectLabelDropdownOpen={
+                        setIsSelectLabelDropdownOpen
+                      }
+                      isAddNewLabel={false}
+                      noteData={noteData}
+                      setNoteData={setNoteData}
+                      noteId={noteId}
+                      isUpdateNote={isUpdateNote}
+                    />
+                  ) : (
+                    <LabelDropdown
+                      setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+                      setIsSelectLabelDropdownOpen={
+                        setIsSelectLabelDropdownOpen
+                      }
+                      isAddNewLabel={true}
+                    />
+                  ))}
 
                 <TextareaAutosize
                   className={`create-note-textarea ${
