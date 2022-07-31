@@ -8,7 +8,7 @@
 .note-title-container {
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .note-footer {
@@ -48,6 +48,10 @@
 
 .flex-gap-small {
   gap: 0.3rem;
+}
+
+.mt-1half{
+  margin-top: 1.5rem;
 }
 
 @media screen and (max-width: 655px) {
