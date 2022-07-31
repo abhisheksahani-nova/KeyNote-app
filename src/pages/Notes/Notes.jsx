@@ -128,7 +128,9 @@ function Notes() {
   let allOtherNotes = applyFilters(filterState, otherNotes);
 
   function filterNotesOnSearchQuery(notes) {
-    const filteredNotes = notes.filter((note) =>
+    let filteredNotes = notes;
+
+    filteredNotes = filteredNotes.filter((note) =>
       note.title.includes(searchQuery)
     );
 

@@ -11,6 +11,7 @@ import { useNotes } from "../../context/notes-context";
 
 function Trash() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const { trash } = useTrash();
   const { theme } = useNotes();
@@ -24,9 +25,22 @@ function Trash() {
     }
   }
 
+  function filterNotesOnSearchQuery(notes) {
+    let filteredNotes = notes;
+
+    filteredNotes = filteredNotes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+
+    return filteredNotes;
+  }
+
+  const trashNotes = filterNotesOnSearchQuery(trash);
+
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
+
       <section className="d-flex">
         <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
 
@@ -38,9 +52,9 @@ function Trash() {
         )}
 
         <div className="notes-container">
-          {trash?.length > 0 ? (
+          {trashNotes?.length > 0 ? (
             <div className="d-flex notecard-container">
-              {trash?.map((trashNote) => {
+              {trashNotes?.map((trashNote) => {
                 return <NoteCard key={trashNote._id} noteInfo={trashNote} />;
               })}
             </div>

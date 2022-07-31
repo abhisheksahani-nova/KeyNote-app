@@ -12,6 +12,7 @@ import { useNotes } from "../../context/notes-context";
 
 function Archives() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const { archives } = useArchives();
   const { theme } = useNotes();
@@ -25,9 +26,21 @@ function Archives() {
     }
   }
 
+  function filterNotesOnSearchQuery(notes) {
+    let filteredNotes = notes;
+
+    filteredNotes = filteredNotes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+
+    return filteredNotes;
+  }
+
+  const archiveNotes = filterNotesOnSearchQuery(archives);
+
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
       <section className="d-flex">
         <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
 
@@ -39,9 +52,9 @@ function Archives() {
         )}
 
         <div className="notes-container">
-          {archives?.length > 0 ? (
+          {archiveNotes?.length > 0 ? (
             <div className="d-flex notecard-container">
-              {archives.map((archiveNote) => {
+              {archiveNotes.map((archiveNote) => {
                 return (
                   <NoteCard key={archiveNote._id} noteInfo={archiveNote} />
                 );
