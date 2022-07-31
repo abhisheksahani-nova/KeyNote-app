@@ -137,6 +137,22 @@ function Notes() {
     left: "18rem",
   };
 
+  function handleCloseCreateNoteBox() {
+    setOpenCreateNote((prev) => !prev);
+    setIsUpdateNote((prev) => !prev);
+
+    setNoteData({
+      title: "",
+      note: "",
+      priority: "low",
+      priorityRank: 1,
+      isPinned: false,
+      tags: [],
+      createdAt: formatDate(),
+      noteColor: "",
+    });
+  }
+
   return (
     <div>
       <Navbar />
@@ -270,7 +286,7 @@ function Notes() {
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
-                      onClick={() => setOpenCreateNote((prev) => !prev)}
+                      onClick={() => handleCloseCreateNoteBox()}
                       className={`btn btn-outline btn-small-size pri-outline-btn ${
                         theme == "dark" && "pri-outline-btn-dark"
                       }`}
@@ -285,7 +301,7 @@ function Notes() {
                           : navigate("/login")
                       }
                     >
-                      Save
+                      {isUpdateNote ? "Edit" : "Save"}
                     </button>
                   </div>
                 </div>
