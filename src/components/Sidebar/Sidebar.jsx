@@ -69,6 +69,16 @@ function Sidebar({ setIsLabelDropdownOpen }) {
           <i className="fa-solid fa-pencil videolib-drawer-icon"></i>
           {windowWidth > 655 && "Edit labels"}
         </li>
+
+        <li
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
+          onClick={() => navigate(token ? "/profile" : "/login")}
+        >
+          <i className="fa-solid fa-pencil videolib-drawer-icon"></i>
+          {windowWidth > 655 && "Profile"}
+        </li>
       </ul>
     </div>
   );

@@ -6,6 +6,7 @@ import {
   Archives,
   Trash,
   LandingPage,
+  Profile,
 } from "./pages/index";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/archives" element={<Archives />}></Route>
         <Route path="/trash" element={<Trash />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         <Route path="/mock" element={<Mockman />}></Route>
       </Routes>
       <ToastContainer autoClose={3000} />
