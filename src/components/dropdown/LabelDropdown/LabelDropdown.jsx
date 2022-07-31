@@ -67,7 +67,11 @@ function LabelDropdown({
     setCheckedState(updatedCheckedState);
 
     if (e.target.checked) {
-      setNoteData({ ...noteData, tags: [...noteData.tags, label] });
+      const isLabel = noteData.tags.includes(label);
+
+      if (!isLabel) {
+        setNoteData({ ...noteData, tags: [...noteData.tags, label] });
+      }
     } else {
       const filterLabel = noteData.tags.filter((tag) => tag !== label);
       setNoteData({ ...noteData, tags: [...filterLabel] });
@@ -93,7 +97,7 @@ function LabelDropdown({
           }`}
         >
           <h5 className="add-label-dropdown-title">
-            {isAddNewLabel ? "Add labels" : "Label note"}
+            {isAddNewLabel ? "Add label" : "Select label"}
           </h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
