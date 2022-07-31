@@ -14,8 +14,10 @@ function Archives() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { archives } = useArchives();
+  const { archives, restoreNoteFromArchives } = useArchives();
   const { theme } = useNotes();
+
+  const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,6 +40,10 @@ function Archives() {
 
   const archiveNotes = filterNotesOnSearchQuery(archives);
 
+  function handleUnarchiveAllNotes() {
+    archiveNotes.map((note) => restoreNoteFromArchives(token, note._id));
+  }
+
   return (
     <div>
       <Navbar setSearchQuery={setSearchQuery} />
@@ -52,6 +58,17 @@ function Archives() {
         )}
 
         <div className="notes-container">
+          <div className="d-flex j-content-right">
+            <button
+              className={`btn pri-outline-btn mr-2 ${
+                theme == "dark" && "pri-outline-btn-dark "
+              }`}
+              onClick={() => handleUnarchiveAllNotes()}
+            >
+              Unarchive All
+            </button>
+          </div>
+
           {archiveNotes?.length > 0 ? (
             <div className="d-flex notecard-container">
               {archiveNotes.map((archiveNote) => {
