@@ -27,6 +27,7 @@ function Notes() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [noteData, setNoteData] = useState({
     title: "",
     note: "",
@@ -123,8 +124,19 @@ function Notes() {
     });
   }
 
-  const allPinnedNotes = applyFilters(filterState, pinnedNotes);
-  const allOtherNotes = applyFilters(filterState, otherNotes);
+  let allPinnedNotes = applyFilters(filterState, pinnedNotes);
+  let allOtherNotes = applyFilters(filterState, otherNotes);
+
+  function filterNotesOnSearchQuery(notes) {
+    const filteredNotes = notes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+
+    return filteredNotes;
+  }
+
+  allPinnedNotes = filterNotesOnSearchQuery(allPinnedNotes);
+  allOtherNotes = filterNotesOnSearchQuery(allOtherNotes);
 
   function onEmojiClick(event, emojiObject) {
     setNoteData({ ...noteData, note: noteData.note + emojiObject.emoji });
@@ -155,9 +167,11 @@ function Notes() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
+
       <section className="d-flex">
         <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+
         {isLabelDropdownOpen && (
           <LabelDropdown
             setIsLabelDropdownOpen={setIsLabelDropdownOpen}
