@@ -13,7 +13,7 @@ function Trash() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { trash } = useTrash();
+  const { trash, deleteAllNotesFromTrash } = useTrash();
   const { theme } = useNotes();
 
   const navigate = useNavigate();
@@ -52,6 +52,17 @@ function Trash() {
         )}
 
         <div className="notes-container">
+          <div className="d-flex j-content-right">
+            <button
+              className={`btn pri-outline-btn mr-2 ${
+                theme == "dark" && "pri-outline-btn-dark "
+              }`}
+              onClick={() => deleteAllNotesFromTrash()}
+            >
+              Delete All
+            </button>
+          </div>
+
           {trashNotes?.length > 0 ? (
             <div className="d-flex notecard-container">
               {trashNotes?.map((trashNote) => {

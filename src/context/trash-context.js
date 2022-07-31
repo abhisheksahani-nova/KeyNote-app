@@ -6,7 +6,7 @@ const TrashContext = createContext();
 const TrashProvider = ({ children }) => {
   const [trash, setTrash] = useState([]);
 
-  const addNoteToTrash = async (noteInfo) => {
+  const addNoteToTrash = (noteInfo) => {
     try {
       setTrash([...trash, noteInfo]);
       toast("Note added to trash", { type: "success" });
@@ -15,7 +15,7 @@ const TrashProvider = ({ children }) => {
     }
   };
 
-  const restoreNoteFromTrash = async (noteInfo) => {
+  const restoreNoteFromTrash = (noteInfo) => {
     try {
       const removedNote = trash.filter((note) => note._id !== noteInfo._id);
       setTrash(removedNote);
@@ -25,13 +25,22 @@ const TrashProvider = ({ children }) => {
     }
   };
 
-  const deleteNoteFromTrash = async (id) => {
+  const deleteNoteFromTrash = (id) => {
     try {
       const removedNote = trash.filter((note) => note._id !== id);
       setTrash(removedNote);
       toast("Note deleted", { type: "success" });
     } catch (error) {
       toast("Fail to delete note", { type: "error" });
+    }
+  };
+
+  const deleteAllNotesFromTrash = () => {
+    try {
+      setTrash([]);
+      toast("All note deleted", { type: "success" });
+    } catch (error) {
+      toast("Fail to delete all note", { type: "error" });
     }
   };
 
@@ -43,6 +52,7 @@ const TrashProvider = ({ children }) => {
         addNoteToTrash,
         restoreNoteFromTrash,
         deleteNoteFromTrash,
+        deleteAllNotesFromTrash,
       }}
     >
       {children}
