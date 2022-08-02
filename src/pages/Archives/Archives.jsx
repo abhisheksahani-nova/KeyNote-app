@@ -1,13 +1,23 @@
-import React from "react";
-import { Navbar, Sidebar, NoteCard } from "../../components/index";
+import React, { useState } from "react";
+import {
+  Navbar,
+  Sidebar,
+  NoteCard,
+  LabelDropdown,
+} from "../../components/index";
 import { useArchives } from "../../context/archive-context";
 import "./Archives.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useNotes } from "../../context/notes-context";
 
 function Archives() {
-  const { archives } = useArchives();
+  const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { archives, restoreNoteFromArchives } = useArchives();
   const { theme } = useNotes();
+
+  const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,15 +28,50 @@ function Archives() {
     }
   }
 
+  function filterNotesOnSearchQuery(notes) {
+    let filteredNotes = notes;
+
+    filteredNotes = filteredNotes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+
+    return filteredNotes;
+  }
+
+  const archiveNotes = filterNotesOnSearchQuery(archives);
+
+  function handleUnarchiveAllNotes() {
+    archiveNotes.map((note) => restoreNoteFromArchives(token, note._id));
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
       <section className="d-flex">
-        <Sidebar />
+        <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+
+        {isLabelDropdownOpen && (
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            isAddNewLabel={true}
+          />
+        )}
+
         <div className="notes-container">
-          {archives?.length > 0 ? (
+          <div className="d-flex j-content-right">
+            <button
+              className={`btn pri-outline-btn mr-2 ${
+                theme == "dark" && "pri-outline-btn-dark "
+              }`}
+              onClick={() => handleUnarchiveAllNotes()}
+            >
+              Unarchive All
+            </button>
+          </div>
+
+          {archiveNotes?.length > 0 ? (
             <div className="d-flex notecard-container">
-              {archives.map((archiveNote) => {
+              {archiveNotes.map((archiveNote) => {
                 return (
                   <NoteCard key={archiveNote._id} noteInfo={archiveNote} />
                 );

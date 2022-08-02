@@ -62,17 +62,17 @@ function NoteCard({
         noteColor && noteColor
       }`}
     >
-      <div className="d-flex note-title-container">
-        <h4> {title} </h4>
+      <div className="d-flex note-title-container word-wrap align-items-start">
+        <h4 className="word-wrap"> {title} </h4>
         <i
           className="fa-solid fa-thumbtack"
           onClick={() => handleTogglePinNote(token, _id)}
         ></i>
       </div>
 
-      <small>{note}</small>
+      <small className="word-wrap">{note}</small>
 
-      <div className="d-flex mt-1 flex-wrap flex-gap-small">
+      <div className="d-flex mt-1half flex-wrap flex-gap-small">
         <small className="note-label-priority"> {priority} </small>
 
         {tags.map((tag) => {
@@ -86,26 +86,26 @@ function NoteCard({
         </div>
         <div
           className={`d-flex note-footer ${
-            location.pathname == "/"
+            location.pathname == "/home"
               ? "note-icons-container"
               : "archivenote-icons-container"
           } `}
         >
-          {location.pathname == "/" && (
+          {location.pathname == "/home" && (
             <i
               className="fa-solid fa-pencil"
               onClick={() => handleUpdateNote(_id)}
             ></i>
           )}
 
-          {location.pathname == "/" && (
+          {location.pathname == "/home" && (
             <i
               className="fa-solid fa-box-archive"
               onClick={() => addNoteToArchives(token, noteInfo, _id)}
             ></i>
           )}
 
-          {location.pathname !== "/" && (
+          {location.pathname !== "/home" && (
             <i
               className="fa-solid fa-window-restore"
               onClick={() =>
@@ -121,7 +121,7 @@ function NoteCard({
             onClick={() =>
               location.pathname == "/archives"
                 ? deleteNoteFromArchives(token, _id)
-                : location.pathname == "/"
+                : location.pathname == "/home"
                 ? handleAddNoteToTrash(noteInfo, _id, token)
                 : deleteNoteFromTrash(_id)
             }

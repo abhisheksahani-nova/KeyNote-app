@@ -96,6 +96,7 @@ const NotesProvider = ({ children }) => {
       const response = await axios.post("/api/auth/login", userLoginData);
       localStorage.setItem("token", response.data.encodedToken);
       localStorage.setItem("email", userLoginData.email);
+      localStorage.setItem("username", "Abhishek Sahani");
       toast("Successfully login", { type: "success" });
       navigate("/home");
     } catch (error) {

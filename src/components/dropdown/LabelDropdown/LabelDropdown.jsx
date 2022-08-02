@@ -46,10 +46,16 @@ function LabelDropdown({
   }
 
   function handleAddNewLabel() {
-    if (label) {
+    const isLabel = labels.includes(label);
+
+    if (label && !isLabel) {
       setLabels([...labels, label]);
       setLabel("");
       toast("Label added", { type: "success" });
+    } else if (label && isLabel) {
+      toast("Label already exist", { type: "error" });
+    } else {
+      toast("Label is empty", { type: "error" });
     }
   }
 
@@ -61,7 +67,11 @@ function LabelDropdown({
     setCheckedState(updatedCheckedState);
 
     if (e.target.checked) {
-      setNoteData({ ...noteData, tags: [...noteData.tags, label] });
+      const isLabel = noteData.tags.includes(label);
+
+      if (!isLabel) {
+        setNoteData({ ...noteData, tags: [...noteData.tags, label] });
+      }
     } else {
       const filterLabel = noteData.tags.filter((tag) => tag !== label);
       setNoteData({ ...noteData, tags: [...filterLabel] });
@@ -87,7 +97,7 @@ function LabelDropdown({
           }`}
         >
           <h5 className="add-label-dropdown-title">
-            {isAddNewLabel ? "Add labels" : "Label note"}
+            {isAddNewLabel ? "Add label" : "Select label"}
           </h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
@@ -114,10 +124,10 @@ function LabelDropdown({
         )}
 
         {isAddNewLabel
-          ? labels?.map((label) => {
+          ? labels?.map((label, index) => {
               return (
                 <li
-                  key={label}
+                  key={index}
                   className="d-flex li-item playlist-li-item cursor-p j-space-between"
                 >
                   <h5 className="ml-1 break-word">{label}</h5>
@@ -131,7 +141,7 @@ function LabelDropdown({
           : labels?.map((label, index) => {
               return (
                 <li
-                  key={label}
+                  key={index}
                   className="d-flex li-item playlist-li-item cursor-p align-item-center"
                 >
                   <input

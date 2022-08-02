@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNotes } from "../../context/notes-context";
 
-function Sidebar() {
+function Sidebar({ setIsLabelDropdownOpen }) {
   const [windowWidth, setWindowWidth] = useState();
   const { theme } = useNotes();
   const navigate = useNavigate();
@@ -64,9 +64,20 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
           }`}
+          onClick={() => setIsLabelDropdownOpen((prev) => !prev)}
         >
           <i className="fa-solid fa-pencil videolib-drawer-icon"></i>
           {windowWidth > 655 && "Edit labels"}
+        </li>
+
+        <li
+          className={`videolib-list-item sidebar-list ${
+            theme == "dark" && "dark-theme-font-clr sidebar-list-dark"
+          }`}
+          onClick={() => navigate(token ? "/profile" : "/login")}
+        >
+          <i className="fa-solid fa-pencil videolib-drawer-icon"></i>
+          {windowWidth > 655 && "Profile"}
         </li>
       </ul>
     </div>

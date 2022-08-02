@@ -14,6 +14,8 @@ import { useFilter, applyFilters } from "../../reducer/filterReducer";
 import ColorSelector from "./ColorSelector/ColorSelector";
 import Picker from "emoji-picker-react";
 import { useNavigate } from "react-router-dom";
+import { useLabels } from "../../context/labels-context";
+import { toast } from "react-toastify";
 
 function Notes() {
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
@@ -25,6 +27,7 @@ function Notes() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isUpdateNote, setIsUpdateNote] = useState(false);
   const [noteId, setNoteId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [noteData, setNoteData] = useState({
     title: "",
     note: "",
@@ -38,6 +41,8 @@ function Notes() {
 
   const { notes, addNewNote, updateNote, theme } = useNotes();
   const { filterState, filterDispatch } = useFilter();
+  const { labels } = useLabels();
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -69,21 +74,35 @@ function Notes() {
     if (isUpdateNote) {
       updateNote(token, noteData, noteId);
       setIsUpdateNote((prev) => !prev);
+      setOpenCreateNote((prev) => !prev);
+      setNoteData({
+        title: "",
+        note: "",
+        priority: "low",
+        priorityRank: 1,
+        isPinned: false,
+        tags: [],
+        createdAt: formatDate(),
+        noteColor: "",
+      });
     } else {
-      addNewNote(token, noteData);
+      if (noteData.title) {
+        addNewNote(token, noteData);
+        setOpenCreateNote((prev) => !prev);
+        setNoteData({
+          title: "",
+          note: "",
+          priority: "low",
+          priorityRank: 1,
+          isPinned: false,
+          tags: [],
+          createdAt: formatDate(),
+          noteColor: "",
+        });
+      } else {
+        toast("Add title to note", { type: "message" });
+      }
     }
-
-    setOpenCreateNote((prev) => !prev);
-    setNoteData({
-      title: "",
-      note: "",
-      priority: "low",
-      priorityRank: 1,
-      isPinned: false,
-      tags: [],
-      createdAt: formatDate(),
-      noteColor: "",
-    });
   }
 
   function handlePriorityData(e) {
@@ -105,8 +124,21 @@ function Notes() {
     });
   }
 
-  const allPinnedNotes = applyFilters(filterState, pinnedNotes);
-  const allOtherNotes = applyFilters(filterState, otherNotes);
+  let allPinnedNotes = applyFilters(filterState, pinnedNotes);
+  let allOtherNotes = applyFilters(filterState, otherNotes);
+
+  function filterNotesOnSearchQuery(notes) {
+    let filteredNotes = notes;
+
+    filteredNotes = filteredNotes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+
+    return filteredNotes;
+  }
+
+  allPinnedNotes = filterNotesOnSearchQuery(allPinnedNotes);
+  allOtherNotes = filterNotesOnSearchQuery(allOtherNotes);
 
   function onEmojiClick(event, emojiObject) {
     setNoteData({ ...noteData, note: noteData.note + emojiObject.emoji });
@@ -119,11 +151,29 @@ function Notes() {
     left: "18rem",
   };
 
+  function handleCloseCreateNoteBox() {
+    setOpenCreateNote((prev) => !prev);
+    setIsUpdateNote((prev) => !prev);
+
+    setNoteData({
+      title: "",
+      note: "",
+      priority: "low",
+      priorityRank: 1,
+      isPinned: false,
+      tags: [],
+      createdAt: formatDate(),
+      noteColor: "",
+    });
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
+
       <section className="d-flex">
-        <Sidebar />
+        <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+
         {isLabelDropdownOpen && (
           <LabelDropdown
             setIsLabelDropdownOpen={setIsLabelDropdownOpen}
@@ -176,17 +226,28 @@ function Notes() {
                   />
                 )}
 
-                {isSelectLabelDropdownOpen && (
-                  <LabelDropdown
-                    setIsLabelDropdownOpen={setIsLabelDropdownOpen}
-                    setIsSelectLabelDropdownOpen={setIsSelectLabelDropdownOpen}
-                    isAddNewLabel={false}
-                    noteData={noteData}
-                    setNoteData={setNoteData}
-                    noteId={noteId}
-                    isUpdateNote={isUpdateNote}
-                  />
-                )}
+                {isSelectLabelDropdownOpen &&
+                  (labels.length > 0 ? (
+                    <LabelDropdown
+                      setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+                      setIsSelectLabelDropdownOpen={
+                        setIsSelectLabelDropdownOpen
+                      }
+                      isAddNewLabel={false}
+                      noteData={noteData}
+                      setNoteData={setNoteData}
+                      noteId={noteId}
+                      isUpdateNote={isUpdateNote}
+                    />
+                  ) : (
+                    <LabelDropdown
+                      setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+                      setIsSelectLabelDropdownOpen={
+                        setIsSelectLabelDropdownOpen
+                      }
+                      isAddNewLabel={true}
+                    />
+                  ))}
 
                 <TextareaAutosize
                   className={`create-note-textarea ${
@@ -241,7 +302,7 @@ function Notes() {
                   </div>
                   <div className="d-flex note-footer note-label-priority-container create-note-btn-container">
                     <button
-                      onClick={() => setOpenCreateNote((prev) => !prev)}
+                      onClick={() => handleCloseCreateNoteBox()}
                       className={`btn btn-outline btn-small-size pri-outline-btn ${
                         theme == "dark" && "pri-outline-btn-dark"
                       }`}
@@ -256,7 +317,7 @@ function Notes() {
                           : navigate("/login")
                       }
                     >
-                      Save
+                      {isUpdateNote ? "Edit" : "Save"}
                     </button>
                   </div>
                 </div>

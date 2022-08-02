@@ -2,9 +2,11 @@ import React from "react";
 import { Navbar } from "../../components/index";
 import "./LandingPage.css";
 import { useNavigate } from "react-router-dom";
+import { useNotes } from "../../context/notes-context";
 
 function LandingPage() {
   const navigate = useNavigate();
+  const { theme } = useNotes();
 
   return (
     <div>
@@ -20,7 +22,9 @@ function LandingPage() {
               your neurons dataless.
             </h1>
             <button
-              className="btn pri-outline-btn width-max-content"
+              className={`btn pri-outline-btn width-max-content ${
+                theme == "dark" && "pri-outline-btn-dark"
+              }`}
               onClick={() => navigate("/login")}
             >
               Join Now!

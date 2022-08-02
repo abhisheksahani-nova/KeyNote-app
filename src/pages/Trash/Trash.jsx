@@ -1,11 +1,19 @@
-import React from "react";
-import { Navbar, Sidebar, NoteCard } from "../../components/index";
+import React, { useState } from "react";
+import {
+  Navbar,
+  Sidebar,
+  NoteCard,
+  LabelDropdown,
+} from "../../components/index";
 import { useTrash } from "../../context/trash-context";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useNotes } from "../../context/notes-context";
 
 function Trash() {
-  const { trash } = useTrash();
+  const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { trash, deleteAllNotesFromTrash } = useTrash();
   const { theme } = useNotes();
 
   const navigate = useNavigate();
@@ -17,15 +25,47 @@ function Trash() {
     }
   }
 
+  function filterNotesOnSearchQuery(notes) {
+    let filteredNotes = notes;
+
+    filteredNotes = filteredNotes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+
+    return filteredNotes;
+  }
+
+  const trashNotes = filterNotesOnSearchQuery(trash);
+
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} />
+
       <section className="d-flex">
-        <Sidebar />
+        <Sidebar setIsLabelDropdownOpen={setIsLabelDropdownOpen} />
+
+        {isLabelDropdownOpen && (
+          <LabelDropdown
+            setIsLabelDropdownOpen={setIsLabelDropdownOpen}
+            isAddNewLabel={true}
+          />
+        )}
+
         <div className="notes-container">
-          {trash?.length > 0 ? (
+          <div className="d-flex j-content-right">
+            <button
+              className={`btn pri-outline-btn mr-2 ${
+                theme == "dark" && "pri-outline-btn-dark "
+              }`}
+              onClick={() => deleteAllNotesFromTrash()}
+            >
+              Delete All
+            </button>
+          </div>
+
+          {trashNotes?.length > 0 ? (
             <div className="d-flex notecard-container">
-              {trash?.map((trashNote) => {
+              {trashNotes?.map((trashNote) => {
                 return <NoteCard key={trashNote._id} noteInfo={trashNote} />;
               })}
             </div>

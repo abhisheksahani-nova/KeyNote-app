@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useNotes } from "../../context/notes-context";
 
-function Navbar({ isLanding }) {
+function Navbar({ isLanding, setSearchQuery }) {
   const { theme, setTheme } = useNotes();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -42,6 +42,7 @@ function Navbar({ isLanding }) {
             }`}
             placeholder="Search"
             type="text"
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       )}
